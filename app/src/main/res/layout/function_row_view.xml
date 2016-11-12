@@ -21,18 +21,17 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:contentDescription="Function item letter"
-            android:src="@drawable/ic_chart_gantt" />
+            android:contentDescription="Function item letter" />
 
         <TextView
             android:id="@+id/function_item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_toEndOf="@id/function_item_letter"
             android:layout_toRightOf="@id/function_item_letter"
             android:gravity="center_vertical"
-            android:text="Asdf"
             android:textSize="40dp" />
     </RelativeLayout>
 
