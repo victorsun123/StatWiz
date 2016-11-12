@@ -9,4 +9,5 @@
     <string name="home_page_left">on the left</string>
     <string name="home_page_stat">Stat</string>
     <string name="home_page_wiz">Wiz</string>
+    <string name="title_activity_descriptive_input">DescriptiveInputActivity</string>
 </resources>
