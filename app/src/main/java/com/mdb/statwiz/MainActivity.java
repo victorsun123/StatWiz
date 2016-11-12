@@ -1,22 +1,19 @@
 package com.mdb.statwiz;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-
-//test comment
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String FUNCTIONVIEW = "Function Name";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +47,27 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        String functionTypeName = item.getTitle().toString();
+
+        switch (id) {
+            case R.id.descriptive:
+                break;
+            case R.id.regression:
+                break;
+            case R.id.probability:
+                break;
+            case R.id.sampling:
+                break;
+            case R.id.tables:
+                break;
+            case R.id.reference:
+                break;
+            default:
+                Intent myIntent = new Intent(MainActivity.this, FunctionViewFragment.class);
+                myIntent.putExtra(FUNCTIONVIEW, functionTypeName);
+                startActivity(myIntent);
+                break;
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
