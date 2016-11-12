@@ -4,7 +4,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
     <string name="home_page_welcome">welcome to</string>
     <string name="home_page_choose">choose an option</string>
     <string name="home_page_left">on the left</string>
