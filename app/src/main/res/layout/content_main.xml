@@ -31,7 +31,7 @@
         android:textSize="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/normal_dist" />
+        app:layout_constraintTop_toBottomOf="@+id/normal_dist" />
 
     <RelativeLayout
         android:id="@+id/home_page_name"
@@ -71,7 +71,7 @@
         android:textSize="25dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_page_name" />
+        app:layout_constraintTop_toBottomOf="@+id/home_page_name" />
 
     <TextView
         android:id="@+id/home_page_left"
@@ -81,6 +81,6 @@
         android:textSize="25dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_page_choose" />
+        app:layout_constraintTop_toBottomOf="@+id/home_page_choose" />
 
 </android.support.constraint.ConstraintLayout>

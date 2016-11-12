@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sayan Paul on 11/12/2016.
@@ -20,10 +20,10 @@ import java.util.ArrayList;
 public class FunctionViewAdapter extends RecyclerView.Adapter<FunctionViewAdapter.FunctionViewHolder> {
 
     Context context;
-    ArrayList<Function> functionsList;
+    List<Function> functionsList;
     ColorGenerator generator = ColorGenerator.MATERIAL;
 
-    public FunctionViewAdapter(Context context, ArrayList<Function> functions) {
+    public FunctionViewAdapter(Context context, List<Function> functions) {
         this.context = context;
         this.functionsList = functions;
     }
