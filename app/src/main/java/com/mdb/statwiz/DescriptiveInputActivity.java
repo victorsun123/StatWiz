@@ -1,6 +1,5 @@
 package com.mdb.statwiz;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -26,11 +25,14 @@ public class DescriptiveInputActivity extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), DescriptiveOutputActivity.class);
-                startActivity(intent);
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(android.R.id.content, new DescriptiveOutputActivity())
+                        .commit();
             }
         });
         return layout;
+
     }
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
