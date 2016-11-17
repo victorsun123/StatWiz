@@ -33,7 +33,7 @@
             android:layout_gravity="center_vertical|start"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:src="@drawable/ic_arrow_back_white_24dp"
+            android:src="@drawable/ic_arrow_back_black_24dp"
             app:backgroundTint="@android:color/white"
             app:elevation="6dp" />
 
@@ -44,7 +44,7 @@
             android:layout_gravity="center_vertical|end"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:src="@drawable/ic_arrow_forward_white_24dp"
+            android:src="@drawable/ic_arrow_forward_black_24dp"
             app:backgroundTint="@android:color/white"
             app:elevation="6dp" />
     </FrameLayout>
