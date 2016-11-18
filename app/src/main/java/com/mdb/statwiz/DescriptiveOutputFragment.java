@@ -10,16 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import java.util.ArrayList;
 
-public class DescriptiveOutputActivity extends Fragment {
+public class DescriptiveOutputFragment extends Fragment {
 
     public ArrayList<String> properties;
     public ArrayList<Double> values;
     private RecyclerView rv;
     private DescriptiveAdapter adapter;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.activity_descriptive_output, container, false);
+        View layout = inflater.inflate(R.layout.descriptive_output, container, false);
 
         properties =  new ArrayList<String>();
         values = new ArrayList<Double>();
@@ -35,7 +36,7 @@ public class DescriptiveOutputActivity extends Fragment {
             public void onClick(View view) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(android.R.id.content, new DescriptiveInputActivity())
+                        .replace(R.id.fragment_container, new DescriptiveInputFragment())
                         .commit();
             }
         });

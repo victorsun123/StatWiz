@@ -47,6 +47,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onPause() {
+        fragmentManager.beginTransaction().add(R.id.fragment_container, new MainContentFragment()).commit();
+        super.onPause();
+    }
+
+    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -54,6 +60,9 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.descriptive:
+                DescriptiveInputFragment descriptiveInputFragment = new DescriptiveInputFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, descriptiveInputFragment).commit();
                 break;
             case R.id.distributions:
                 FunctionViewFragment functionViewFragment = new FunctionViewFragment();
