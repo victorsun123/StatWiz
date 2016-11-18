@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
-        android:digits="123456789.,/n"
+        android:digits="0123456789., "
         android:imeOptions="actionNext"
         app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -59,11 +59,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
-        android:digits="123456789.,"
+        android:digits="0123456789., "
         android:imeOptions="actionDone"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/editText"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <android.support.design.widget.FloatingActionButton
@@ -81,6 +79,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95" />
+
+    <Button
+        android:text="Clear Fields"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/fab"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintLeft_toLeftOf="@+id/editText"
+        app:layout_constraintVertical_bias="0.92"
+        android:id="@+id/button" />
 
 
 </android.support.constraint.ConstraintLayout>

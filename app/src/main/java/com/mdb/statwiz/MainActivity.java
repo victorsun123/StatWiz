@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity
 
         MainContentFragment fragment = new MainContentFragment();
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
+   /* @Override
     protected void onPause() {
         fragmentManager.beginTransaction().add(R.id.fragment_container, new MainContentFragment()).commit();
         super.onPause();
-    }
+    }*/
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

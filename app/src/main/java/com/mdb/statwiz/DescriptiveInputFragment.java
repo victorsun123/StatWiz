@@ -9,14 +9,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class DescriptiveInputFragment extends Fragment {
-    private EditText et1, et2;
+    public EditText et1, et2;
     private String list1, list2;
+    private Button button;
+    private FloatingActionButton fab;
     public SharedPreferences preferences;
     public static final String LIST_KEY_1 = "listKey1";
     public static final String LIST_KEY_2 = "listKey2";
+    public String [] nums1, nums2;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.descriptive_input, container, false);
@@ -27,13 +32,24 @@ public class DescriptiveInputFragment extends Fragment {
         et2 = (EditText) layout.findViewById(R.id.editText2);
         et1.setText(list1);
         et2.setText(list2);
-        //list1.split(",");
+
+        nums1 = list1.split(",");
+        nums2 = list2.split(",");
+
+//        for(int i=0;i<)
+
+        button = (Button) layout.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et1.setText("");
+                et2.setText("");
+            }
+        });
 
 
 
-
-
-        FloatingActionButton fab = (FloatingActionButton) layout.findViewById(R.id.fab);
+        fab = (FloatingActionButton) layout.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,9 +66,12 @@ public class DescriptiveInputFragment extends Fragment {
             }
         });
         return layout;
+        //TODO: onbackPressed save in shared preference
+        //TODO: samsung keyboard and thirdy party keybaord have no commas!?!?!?!
 
     }
 
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
