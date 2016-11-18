@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity
     
     private FragmentManager fragmentManager;
 
+    public static final String FUNCTIONNAME = "FUNCTION_NAME";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
