@@ -3,8 +3,12 @@ package com.mdb.statwiz;
 import org.apache.commons.math3.distribution.ChiSquaredDistribution;
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.distribution.TDistribution;
+import org.apache.commons.math3.stat.Frequency;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -14,6 +18,28 @@ import java.util.HashMap;
 public class Calculator
 {
     public Calculator() {}
+
+    public static HashMap<String, Object> descriptiveStats(double[] values)
+    {
+        HashMap<String, Object> calculations = new HashMap<String, Object>();
+        DescriptiveStatistics descStats = new DescriptiveStatistics(values);
+        calculations.put("Mean", descStats.getMean());
+        calculations.put("Max", descStats.getMax());
+        calculations.put("Min", descStats.getMin());
+        calculations.put("SD", descStats.getStandardDeviation());
+        calculations.put("Median", descStats.getPercentile(0.5));
+        calculations.put("Q1", descStats.getPercentile(0.25));
+        calculations.put("Q3", descStats.getPercentile(0.75));
+        calculations.put("Range", ((double)calculations.get("Max") - (double) calculations.get("Min")));
+        calculations.put("N", ((Long) descStats.getN()).doubleValue());
+        Frequency freq = new Frequency();
+        for (double value: values) freq.addValue(value);
+        double[] modes = {};
+        List<Comparable<?>> modesAL = freq.getMode();
+
+
+        return calculations;
+    }
 
     public static HashMap<String, Double> normalDistProb(double mean, double sd, double x)
     {
