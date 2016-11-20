@@ -16,5 +16,4 @@ public class Function {
         this.inputs = inputs;
         this.outputs = outputs;
     }
-
 }
