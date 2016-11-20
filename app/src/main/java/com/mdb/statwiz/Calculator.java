@@ -1,10 +1,14 @@
 package com.mdb.statwiz;
 
+import org.apache.commons.math3.distribution.BinomialDistribution;
 import org.apache.commons.math3.distribution.ChiSquaredDistribution;
+import org.apache.commons.math3.distribution.GeometricDistribution;
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.distribution.TDistribution;
 import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.stat.descriptive.moment.GeometricMean;
+import org.apache.commons.math3.stat.interval.BinomialConfidenceInterval;
 import org.apache.commons.math3.util.DoubleArray;
 
 import java.util.ArrayList;
@@ -28,6 +32,7 @@ public class Calculator
         calculations.put("Max", descStats.getMax());
         calculations.put("Min", descStats.getMin());
         calculations.put("SD", descStats.getStandardDeviation());
+        calculations.put("Variance", descStats.getVariance());
         calculations.put("Median", descStats.getPercentile(0.5));
         calculations.put("Q1", descStats.getPercentile(0.25));
         calculations.put("Q3", descStats.getPercentile(0.75));
@@ -57,20 +62,22 @@ public class Calculator
         }
         Object[] modes = modesArrayList.toArray();
         calculations.put("Mode", modes);
+        calculations.put("Kurtosis", descStats.getKurtosis());
+        calculations.put("Skewness", descStats.getSkewness());
 
         return calculations;
     }
 
-    public static HashMap<String, Double> normalDistProb(double mean, double sd, double x)
+    public static HashMap<String, Double> normalProbDist(double mean, double sd, double x)
     {
-        HashMap<String, Double> calculations = normalDistProb(mean, sd, Double.NEGATIVE_INFINITY, x);
+        HashMap<String, Double> calculations = normalProbDist(mean, sd, Double.NEGATIVE_INFINITY, x);
         double zScore = (x - mean)/sd;
         calculations.put("ZScore", zScore);
 
         return calculations;
     }
 
-    public static HashMap<String, Double> normalDistProb(double mean, double sd, double x0, double x1)
+    public static HashMap<String, Double> normalProbDist(double mean, double sd, double x0, double x1)
     {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         NormalDistribution normDist = new NormalDistribution(mean, sd);
@@ -92,7 +99,16 @@ public class Calculator
     {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         TDistribution tDist = new TDistribution(degreesOfFreedom);
-        calculations.put("Probability", tDist.inverseCumulativeProbability(p));
+        calculations.put("Probability", tDist.cumulativeProbability(p));
+
+        return calculations;
+    }
+
+    public static HashMap<String, Double> inverseT(double degreesOfFreedom,double CI)
+    {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        TDistribution tDist = new TDistribution(degreesOfFreedom);
+        calculations.put("Probability", tDist.inverseCumulativeProbability(CI));
 
         return calculations;
     }
@@ -105,4 +121,31 @@ public class Calculator
 
         return calculations;
     }
+
+    public static HashMap<String, Double> binomDist(int numberOfTrials, double probablityOfSuccess, int x)
+    {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        BinomialDistribution biDist = new BinomialDistribution(numberOfTrials, probablityOfSuccess);
+        //P(X = x)
+        calculations.put("Probability", biDist.probability(x));
+        //P(X <= x)
+        calculations.put("Cumulative Probability", biDist.cumulativeProbability(x) + (double) calculations.get("Probabilty"));
+        calculations.put("Mean", biDist.getNumericalMean());
+
+        return calculations;
+    }
+
+    public static HashMap<String, Double> geomDist(int numberOfTrials, double probablityOfSuccess, int x)
+    {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        GeometricDistribution geoDist = new GeometricDistribution(probablityOfSuccess);
+        //P(X = x)
+        calculations.put("Probability", geoDist.probability(x));
+        //P(X <= x)
+        calculations.put("Cumulative Probability", geoDist.cumulativeProbability(x) + (double) calculations.get("Probabilty"));
+        calculations.put("Mean", geoDist.getNumericalMean());
+
+        return calculations;
+    }
+
 }
