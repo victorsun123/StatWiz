@@ -12,10 +12,10 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.mdb.statwiz.R;
+import com.mdb.statwiz.activities.MainActivity;
 import com.mdb.statwiz.fragments.FormInputFragment;
 import com.mdb.statwiz.utils.Function;
-import com.mdb.statwiz.activities.MainActivity;
-import com.mdb.statwiz.R;
 
 import java.util.List;
 
@@ -74,7 +74,7 @@ public class FunctionViewAdapter extends RecyclerView.Adapter<FunctionViewAdapte
 
                     String functionName = ((TextView) v.findViewById(R.id.function_item_name)).getText().toString();
                     Bundle args = new Bundle();
-                    args.putString(MainActivity.FUNCTIONNAME, functionName);
+                    args.putString(MainActivity.FUNCTIONTYPE, functionName);
                     formInputFragment.setArguments(args);
 
                     manager.beginTransaction()

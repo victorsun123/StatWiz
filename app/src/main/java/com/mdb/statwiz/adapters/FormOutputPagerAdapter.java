@@ -2,7 +2,7 @@ package com.mdb.statwiz.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.mdb.statwiz.fragments.FormOutputFragment;
 
@@ -16,7 +16,7 @@ import java.util.TreeSet;
  * Created by Sayan Paul on 11/19/2016.
  */
 
-public class FormOutputPagerAdapter extends FragmentPagerAdapter {
+public class FormOutputPagerAdapter extends FragmentStatePagerAdapter {
     private List<Tuple<String, Double>> outputs;
 
     public FormOutputPagerAdapter(FragmentManager manager, HashMap<String, Double> outputs) {
