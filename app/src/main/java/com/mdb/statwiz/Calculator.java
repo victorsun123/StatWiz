@@ -5,6 +5,7 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.distribution.TDistribution;
 import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.util.DoubleArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,11 +33,30 @@ public class Calculator
         calculations.put("Q3", descStats.getPercentile(0.75));
         calculations.put("Range", ((double)calculations.get("Max") - (double) calculations.get("Min")));
         calculations.put("N", ((Long) descStats.getN()).doubleValue());
-        Frequency freq = new Frequency();
-        for (double value: values) freq.addValue(value);
-        double[] modes = {};
-        List<Comparable<?>> modesAL = freq.getMode();
-
+        HashMap<Double, Integer> freqs = new HashMap<Double, Integer>();
+        for(Double value: values) {
+            if (freqs.containsKey(value)) {
+                freqs.put(value, (freqs.get(value) + 1));
+            }
+            else {
+                freqs.put(value, 1);
+            }
+        }
+        ArrayList<Double> modesArrayList = new ArrayList<Double>();
+        Integer maxCount = 0;
+        for(Double value: values) {
+            if (freqs.get(value) > maxCount) {
+                maxCount = freqs.get(value);
+                modesArrayList.clear();
+                modesArrayList.add(value);
+            }
+            else if (freqs.get(value) == maxCount) {
+                if (!modesArrayList.contains(value))
+                    modesArrayList.add(value);
+            }
+        }
+        Object[] modes = modesArrayList.toArray();
+        calculations.put("Mode", modes);
 
         return calculations;
     }
