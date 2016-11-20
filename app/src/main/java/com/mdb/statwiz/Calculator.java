@@ -48,7 +48,11 @@ public class Calculator {
             }
         }
         Object[] modes = modesArrayList.toArray();
-        calculations.put("Mode", modes);
+        String modesAsString = "";
+        for (Object o : modes) {
+            modesAsString += o.toString() + ", ";
+        }
+        calculations.put("Mode", modesAsString.substring(0, modesAsString.length() - 2));
 
         return calculations;
     }
