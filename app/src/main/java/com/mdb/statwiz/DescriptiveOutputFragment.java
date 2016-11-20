@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import java.util.ArrayList;
 
 public class DescriptiveOutputFragment extends Fragment {
@@ -19,10 +18,11 @@ public class DescriptiveOutputFragment extends Fragment {
     public ArrayList<Double> values;
     private RecyclerView rv;
     private DescriptiveAdapter adapter;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.descriptive_output, container, false);
 
-        properties =  new ArrayList<String>();
+        properties = new ArrayList<String>();
         values = new ArrayList<Double>();
 
         rv = (RecyclerView) layout.findViewById(R.id.recyclerView);
@@ -30,19 +30,16 @@ public class DescriptiveOutputFragment extends Fragment {
         adapter = new DescriptiveAdapter(getContext(), properties, values);
         rv.setAdapter(adapter);
 
-        FloatingActionButton fab = (FloatingActionButton) layout.findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) layout.findViewById(R.id.submit_input);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, new DescriptiveInputFragment())
-                        .commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new DescriptiveInputFragment())
+                        .addToBackStack("outputToInput").commit();
             }
         });
         return layout;
     }
-
 
 
     @Override

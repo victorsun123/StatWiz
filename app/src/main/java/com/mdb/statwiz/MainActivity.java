@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -28,6 +27,7 @@ public class MainActivity extends AppCompatActivity
         MainContentFragment fragment = new MainContentFragment();
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -42,15 +42,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        int count = getFragmentManager().getBackStackEntryCount();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }
-
-        int count = getFragmentManager().getBackStackEntryCount();
-        if (count == 0) {
+        } else if (count == 0) {
             super.onBackPressed();
         } else {
-            getFragmentManager().popBackStack();
+            getSupportFragmentManager().popBackStack();
         }
     }
 
@@ -70,12 +68,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.descriptive:
                 DescriptiveInputFragment descriptiveInputFragment = new DescriptiveInputFragment();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, descriptiveInputFragment).commit();
+                        .replace(R.id.fragment_container, descriptiveInputFragment).addToBackStack("input").commit();
                 break;
             case R.id.distributions:
                 FunctionViewFragment functionViewFragment = new FunctionViewFragment();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, functionViewFragment).commit();
+                        .replace(R.id.fragment_container, functionViewFragment).addToBackStack("distribution").commit();
                 break;
             case R.id.regression:
                 break;

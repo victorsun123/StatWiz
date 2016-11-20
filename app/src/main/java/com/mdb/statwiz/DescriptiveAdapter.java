@@ -19,16 +19,18 @@ public class DescriptiveAdapter extends RecyclerView.Adapter<DescriptiveAdapter.
     private ArrayList<String> properties;
     private ArrayList<Double> values;
 
-    public DescriptiveAdapter(Context context, ArrayList<String> properties, ArrayList<Double> values){
+    public DescriptiveAdapter(Context context, ArrayList<String> properties, ArrayList<Double> values) {
         this.context = context;
         this.properties = properties;
         this.values = values;
     }
-    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+
+    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.descriptive_row_view,
                 parent, false);
         return new CustomViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         holder.property.setText(properties.get(position));

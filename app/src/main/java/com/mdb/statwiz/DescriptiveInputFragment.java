@@ -6,69 +6,94 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
+import android.text.Selection;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-public class DescriptiveInputFragment extends Fragment {
-    public EditText et1, et2;
-    private String list1, list2;
-    private Button button;
-    private FloatingActionButton fab;
+import java.util.ArrayList;
+
+
+public class DescriptiveInputFragment extends Fragment implements View.OnClickListener {
+    public static final String LIST_KEY = "listKey";
+    public EditText descriptiveInput;
     public SharedPreferences preferences;
-    public static final String LIST_KEY_1 = "listKey1";
-    public static final String LIST_KEY_2 = "listKey2";
-    public String [] nums1, nums2;
-
+    public String[] splitInputString;
+    public ArrayList<Double> inputAsNumbers;
+    private String inputString;
+    private Button clearFields, space;
+    private FloatingActionButton submitInput;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.descriptive_input, container, false);
+
         preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        list1 = preferences.getString(LIST_KEY_1,"");
-        list2 = preferences.getString(LIST_KEY_2,"");
-        et1 = (EditText) layout.findViewById(R.id.editText);
-        et2 = (EditText) layout.findViewById(R.id.editText2);
-        et1.setText(list1);
-        et2.setText(list2);
+        inputString = preferences.getString(LIST_KEY, "");
 
-        nums1 = list1.split(",");
-        nums2 = list2.split(",");
+        descriptiveInput = (EditText) layout.findViewById(R.id.editText);
+        descriptiveInput.setRawInputType(InputType.TYPE_CLASS_NUMBER);
+        descriptiveInput.setText(inputString);
 
-//        for(int i=0;i<)
+        space = (Button) layout.findViewById(R.id.space);
+        clearFields = (Button) layout.findViewById(R.id.clear_field);
+        submitInput = (FloatingActionButton) layout.findViewById(R.id.submit_input);
 
-        button = (Button) layout.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et1.setText("");
-                et2.setText("");
-            }
-        });
+        space.setOnClickListener(this);
+        clearFields.setOnClickListener(this);
+        submitInput.setOnClickListener(this);
 
-
-
-        fab = (FloatingActionButton) layout.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                list1 = et1.getText().toString();
-                list2 = et2.getText().toString();
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString(LIST_KEY_1, list1);
-                editor.putString(LIST_KEY_2, list2);
-                editor.apply();
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, new DescriptiveOutputFragment())
-                        .commit();
-            }
-        });
         return layout;
         //TODO: onbackPressed save in shared preference
         //TODO: samsung keyboard and thirdy party keybaord have no commas!?!?!?!
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.space:
+                descriptiveInput.setText(descriptiveInput.getText().toString() + " ");
+                Selection.setSelection(descriptiveInput.getText(), descriptiveInput.length());
+                break;
+            case R.id.clear_field:
+                descriptiveInput.setText("");
+                break;
+            case R.id.submit_input:
+                inputString = descriptiveInput.getText().toString();
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString(LIST_KEY, inputString);
+                editor.apply();
+
+                splitInputString = inputString.split("\\s+");
+
+                inputAsNumbers = new ArrayList<>();
+                try {
+                    for (String input : splitInputString)
+                        inputAsNumbers.add(Double.parseDouble(input));
+                } catch (Exception e) {
+                    Toast.makeText(getActivity().getApplicationContext(),
+                            "Incorrect number format!", Toast.LENGTH_LONG).show();
+                }
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new DescriptiveOutputFragment())
+                        .addToBackStack("inputToOutput").commit();
+                break;
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        inputString = descriptiveInput.getText().toString();
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(LIST_KEY, inputString);
+        editor.apply();
+        super.onDestroyView();
     }
 
     @Override
