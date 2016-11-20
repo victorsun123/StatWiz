@@ -73,7 +73,10 @@ public class FunctionViewAdapter extends RecyclerView.Adapter<FunctionViewAdapte
                     args.putString(MainActivity.FUNCTIONNAME, functionName);
                     formInputFragment.setArguments(args);
 
-                    manager.beginTransaction().replace(R.id.fragment_container, formInputFragment).commit();
+                    manager.beginTransaction()
+                            .replace(R.id.fragment_container, formInputFragment)
+                            .addToBackStack("functionView")
+                            .commit();
                 }
             });
         }

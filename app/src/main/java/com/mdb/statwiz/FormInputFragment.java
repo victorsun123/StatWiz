@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,8 +14,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 /**
  * Created by Sayan Paul on 11/17/2016.
@@ -68,15 +64,12 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        int targetPage;
         switch (id) {
             case R.id.form_input_left:
-                targetPage = (outputPager.getCurrentItem() - 1) % outputPagerAdapter.getCount();
-                outputPager.setCurrentItem(targetPage, true);
+                outputPager.setCurrentItem(outputPager.getCurrentItem() - 1, true);
                 break;
             case R.id.form_input_right:
-                targetPage = (outputPager.getCurrentItem() + 1) % outputPagerAdapter.getCount();
-                outputPager.setCurrentItem(targetPage, true);
+                outputPager.setCurrentItem(outputPager.getCurrentItem() + 1, true);
                 break;
         }
     }

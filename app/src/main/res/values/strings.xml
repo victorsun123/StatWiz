@@ -9,4 +9,7 @@
     <string name="home_page_left">on the left</string>
     <string name="home_page_stat">Stat</string>
     <string name="home_page_wiz">Wiz</string>
+    <string name="title_activity_descriptive_input">DescriptiveInputActivity</string>
+    <string name="descriptive_title">Descriptive Data Input</string>
+    <string name="descriptive_instruction">Instructions: Fill in the blank with space separated values of your data for descriptive calculation</string>
 </resources>
