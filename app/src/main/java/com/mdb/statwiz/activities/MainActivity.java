@@ -1,4 +1,4 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -10,6 +10,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import com.mdb.statwiz.R;
+import com.mdb.statwiz.fragments.DescriptiveInputFragment;
+import com.mdb.statwiz.fragments.FunctionViewFragment;
+import com.mdb.statwiz.fragments.MainContentFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

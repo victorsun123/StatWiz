@@ -1,4 +1,4 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.adapters;
 
 import android.content.Context;
 import android.support.design.widget.TextInputEditText;
@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.mdb.statwiz.R;
 
 import java.util.List;
 

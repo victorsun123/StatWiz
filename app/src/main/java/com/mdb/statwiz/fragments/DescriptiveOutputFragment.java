@@ -1,4 +1,4 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mdb.statwiz.R;
+import com.mdb.statwiz.adapters.DescriptiveAdapter;
+import com.mdb.statwiz.utils.Calculator;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,10 +21,11 @@ import java.util.HashMap;
 /**
  * Created by victorsun on 11/13/16.
  */
+
 public class DescriptiveOutputFragment extends Fragment {
 
     private static final String[] DOUBLE_STATS = {"Median", "Mean", "SD", "Min", "Max", "Range", "Q1", "Q3"};
-    private static final String[] PROPERTIES = {"Count", "Median", "Mean", "Standard Deviation", "Min", "Max", "Range", "Q1", "Q3", "Mode"};
+    private static final String[] PROPERTIES = {"Count", "Median", "Mean", "Standard Deviation", "Min", "Max", "Range", "Q1", "Q3", "Mode(s)"};
 
     public ArrayList<String> values;
     private RecyclerView resultsRV;

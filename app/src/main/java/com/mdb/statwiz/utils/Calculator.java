@@ -1,4 +1,4 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.utils;
 
 import org.apache.commons.math3.distribution.ChiSquaredDistribution;
 import org.apache.commons.math3.distribution.NormalDistribution;

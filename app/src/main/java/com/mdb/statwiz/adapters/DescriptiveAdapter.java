@@ -1,4 +1,4 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mdb.statwiz.R;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by victorsun on 11/13/16.
@@ -35,7 +38,7 @@ public class DescriptiveAdapter extends RecyclerView.Adapter<DescriptiveAdapter.
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         holder.property.setText(properties.get(position));
-        holder.value.setText((values.get(position)));
+        holder.value.setText(values.get(position));
     }
 
     @Override
@@ -47,7 +50,7 @@ public class DescriptiveAdapter extends RecyclerView.Adapter<DescriptiveAdapter.
     class CustomViewHolder extends RecyclerView.ViewHolder {
         TextView property, value;
 
-        public CustomViewHolder(View itemView) {
+        CustomViewHolder(View itemView) {
             super(itemView);
             property = (TextView) itemView.findViewById(R.id.property);
             value = (TextView) itemView.findViewById(R.id.value);
