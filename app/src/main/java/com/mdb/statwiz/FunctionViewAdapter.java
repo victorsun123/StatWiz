@@ -1,6 +1,8 @@
 package com.mdb.statwiz;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +62,20 @@ public class FunctionViewAdapter extends RecyclerView.Adapter<FunctionViewAdapte
 
             letterView = (ImageView) v.findViewById(R.id.function_item_letter);
             itemName = (TextView) v.findViewById(R.id.function_item_name);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager manager = ((MainActivity) context).getSupportFragmentManager();
+                    FormInputFragment formInputFragment = new FormInputFragment();
+
+                    String functionName = ((TextView) v.findViewById(R.id.function_item_name)).getText().toString();
+                    Bundle args = new Bundle();
+                    args.putString(MainActivity.FUNCTIONNAME, functionName);
+                    formInputFragment.setArguments(args);
+
+                    manager.beginTransaction().replace(R.id.fragment_container, formInputFragment).commit();
+                }
+            });
         }
     }
 }

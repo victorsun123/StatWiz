@@ -12,9 +12,10 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class FunctionViewFragment extends Fragment {
     private RecyclerView mRecyclerView;
-    private FunctionViewAdapter mFunctionViewAdapter;
+    private FunctionViewAdapter mAdapter;
 
     @Nullable
     @Override
@@ -30,8 +31,8 @@ public class FunctionViewFragment extends Fragment {
         Function testFunction = new Function("asdf", new ArrayList<String>(0), new ArrayList<String>(0));
         List<Function> functionList = new ArrayList<>();
         functionList.add(testFunction);
-        mFunctionViewAdapter = new FunctionViewAdapter(getActivity(), functionList);
-        mRecyclerView.setAdapter(mFunctionViewAdapter);
+        mAdapter = new FunctionViewAdapter(getActivity(), functionList);
+        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 }
