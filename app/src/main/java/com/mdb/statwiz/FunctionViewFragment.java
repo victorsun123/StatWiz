@@ -16,22 +16,21 @@ import java.util.List;
 public class FunctionViewFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private FunctionViewAdapter mAdapter;
+    private String functionType;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.function_view_fragment, container, false);
         mRecyclerView = (RecyclerView) layout.findViewById(R.id.function_list_recycler_view);
+        functionType = getArguments().getString(MainActivity.FUNCTIONTYPE, "");
         return layout;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Function testFunction = new Function("asdf", new ArrayList<String>(0), new ArrayList<String>(0));
-        List<Function> functionList = new ArrayList<>();
-        functionList.add(testFunction);
-        mAdapter = new FunctionViewAdapter(getActivity(), functionList);
+        mAdapter = new FunctionViewAdapter(getActivity(), FunctionsList.getFunctionsList(functionType));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }

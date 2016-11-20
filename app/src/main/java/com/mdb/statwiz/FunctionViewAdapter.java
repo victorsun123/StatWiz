@@ -70,7 +70,7 @@ public class FunctionViewAdapter extends RecyclerView.Adapter<FunctionViewAdapte
 
                     String functionName = ((TextView) v.findViewById(R.id.function_item_name)).getText().toString();
                     Bundle args = new Bundle();
-                    args.putString(MainActivity.FUNCTIONNAME, functionName);
+                    args.putString(MainActivity.FUNCTIONTYPE, functionName);
                     formInputFragment.setArguments(args);
 
                     manager.beginTransaction()

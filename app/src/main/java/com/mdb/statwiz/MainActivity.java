@@ -14,7 +14,8 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static final String FUNCTIONNAME = "FUNCTION_NAME";
+    public static final String FUNCTIONTYPE = "FUNCTION_TYPE";
+    public static final String DISTRIBUTIONS = "distributions";
     private FragmentManager fragmentManager;
 
     @Override
@@ -71,8 +72,11 @@ public class MainActivity extends AppCompatActivity
                 if (currentlyVisible instanceof FunctionViewFragment)
                     break;
                 FunctionViewFragment functionViewFragment = new FunctionViewFragment();
+                Bundle args = new Bundle();
+                args.putString(FUNCTIONTYPE, DISTRIBUTIONS);
+                functionViewFragment.setArguments(args);
                 fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, functionViewFragment).addToBackStack("distribution").commit();
+                        .replace(R.id.fragment_container, functionViewFragment).addToBackStack(DISTRIBUTIONS).commit();
                 break;
             case R.id.regression:
                 break;
