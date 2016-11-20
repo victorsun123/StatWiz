@@ -12,10 +12,9 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    
-    private FragmentManager fragmentManager;
 
     public static final String FUNCTIONNAME = "FUNCTION_NAME";
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

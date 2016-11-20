@@ -2,6 +2,7 @@ package com.mdb.statwiz;
 
 import android.content.Context;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,19 +16,21 @@ import java.util.List;
 
 public class FormInputAdapter extends RecyclerView.Adapter<FormInputAdapter.FormInputViewHolder> {
     List<String> inputs;
+    Context context;
 
-    public FormInputAdapter(List<String> inputs) {
+    public FormInputAdapter(Context context, List<String> inputs) {
         this.inputs = inputs;
+        this.context = context;
     }
 
     @Override
     public void onBindViewHolder(FormInputViewHolder holder, int position) {
-        holder.inputField.setText(inputs.get(position));
+        holder.inputLayout.setHint(inputs.get(position));
     }
 
     @Override
     public FormInputViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.form_input_row, null, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.form_input_row, parent, false);
         return new FormInputViewHolder(v);
     }
 
@@ -37,12 +40,14 @@ public class FormInputAdapter extends RecyclerView.Adapter<FormInputAdapter.Form
     }
 
     class FormInputViewHolder extends RecyclerView.ViewHolder {
-        public TextInputEditText inputField;
+        TextInputEditText inputField;
+        TextInputLayout inputLayout;
 
         public FormInputViewHolder(View v) {
             super(v);
 
             inputField = (TextInputEditText) v.findViewById(R.id.form_input_field);
+            inputLayout = (TextInputLayout) v.findViewById(R.id.form_input_field_layout);
         }
     }
 }
