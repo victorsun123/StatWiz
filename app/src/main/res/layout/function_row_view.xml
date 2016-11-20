@@ -34,7 +34,8 @@
             android:layout_toEndOf="@id/function_item_letter"
             android:layout_toRightOf="@id/function_item_letter"
             android:gravity="center_vertical"
-            android:textSize="30dp" />
+            android:fontFamily="sans-serif-light"
+            android:textSize="25dp" />
     </RelativeLayout>
 
     <View
