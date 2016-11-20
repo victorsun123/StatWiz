@@ -1,4 +1,4 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.mdb.statwiz.R;
+import com.mdb.statwiz.adapters.FunctionViewAdapter;
+import com.mdb.statwiz.utils.Function;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +32,7 @@ public class FunctionViewFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Function testFunction = new Function("asdf", new ArrayList<String>(0), new ArrayList<String>(0));
+        Function testFunction = new Function("asdf", new ArrayList<String>(0));
         List<Function> functionList = new ArrayList<>();
         functionList.add(testFunction);
         mAdapter = new FunctionViewAdapter(getActivity(), functionList);

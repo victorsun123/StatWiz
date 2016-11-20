@@ -1,4 +1,4 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,11 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.mdb.statwiz.R;
 
-/**
- * Created by victorsun on 11/13/16.
- */
+import java.util.ArrayList;
 
 public class DescriptiveInputFragment extends Fragment implements View.OnClickListener {
     public static final String LIST_KEY = "listKey";
