@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ import java.util.HashMap;
 public class DescriptiveOutputFragment extends Fragment {
 
     private static final String[] DOUBLE_STATS = {"Median", "Mean", "SD", "Min", "Max", "Range", "Q1", "Q3"};
-    private static final String[] PROPERTIES = {"Count", "Medium", "Mean", "Standard Deviation", "Min", "Max", "Range", "Q1", "Q3", "Mode"};
+    private static final String[] PROPERTIES = {"Count", "Median", "Mean", "Standard Deviation", "Min", "Max", "Range", "Q1", "Q3", "Mode"};
 
     public ArrayList<String> values;
     private RecyclerView resultsRV;
@@ -34,10 +35,10 @@ public class DescriptiveOutputFragment extends Fragment {
         HashMap<String, Object> descriptiveFunction = Calculator.descriptiveStats(data);
         values = new ArrayList<>();
         values.add(Integer.toString(((Double) descriptiveFunction.get("N")).intValue()));
+        DecimalFormat dfFormat = new DecimalFormat("#.####");
         for (String stat : DOUBLE_STATS)
-            values.add(Double.toString((Double) descriptiveFunction.get(stat)));
+            values.add(dfFormat.format(descriptiveFunction.get(stat)));
         values.add((String) descriptiveFunction.get("Mode"));
-
 
         resultsRV = (RecyclerView) layout.findViewById(R.id.recyclerView);
         resultsRV.setLayoutManager(new LinearLayoutManager(getActivity()));

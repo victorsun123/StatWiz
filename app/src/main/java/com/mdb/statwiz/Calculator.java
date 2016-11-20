@@ -22,9 +22,9 @@ public class Calculator {
         calculations.put("Max", descStats.getMax());
         calculations.put("Min", descStats.getMin());
         calculations.put("SD", descStats.getStandardDeviation());
-        calculations.put("Median", descStats.getPercentile(0.5));
-        calculations.put("Q1", descStats.getPercentile(0.25));
-        calculations.put("Q3", descStats.getPercentile(0.75));
+        calculations.put("Median", descStats.getPercentile(50.0));
+        calculations.put("Q1", descStats.getPercentile(25.0));
+        calculations.put("Q3", descStats.getPercentile(75.0));
         calculations.put("Range", ((double) calculations.get("Max") - (double) calculations.get("Min")));
         calculations.put("N", ((Long) descStats.getN()).doubleValue());
         HashMap<Double, Integer> freqs = new HashMap<Double, Integer>();
