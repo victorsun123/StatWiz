@@ -13,12 +13,11 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static final String FUNCTIONNAME = "FUNCTION_NAME";
     private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -51,12 +50,6 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().popBackStack();
         }
     }
-
-   /* @Override
-    protected void onPause() {
-        fragmentManager.beginTransaction().add(R.id.fragment_container, new MainContentFragment()).commit();
-        super.onPause();
-    }*/
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
