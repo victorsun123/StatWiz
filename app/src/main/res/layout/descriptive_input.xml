@@ -11,49 +11,39 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:padding="16dp"
-        android:text="Descriptive Data Input"
+        android:text="@string/descriptive_title"
         android:textColor="#222222"
         android:textSize="24dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/Instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:paddingBottom="8dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="8dp"
-        android:text="Instructions: Fill in the blank with space separated values of your data for descriptive calculation "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:text="@string/descriptive_instruction"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:digits="0123456789. "
         android:ems="10"
         android:imeOptions="actionDone"
         android:inputType="numberDecimal"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/space"
         app:layout_constraintTop_toBottomOf="@+id/Instructions" />
@@ -73,27 +63,27 @@
         android:id="@+id/submit_input"
         android:layout_width="56dp"
         android:layout_height="56dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:clickable="true"
-        android:src="@drawable/ic_arrow_forward_white_24dp"
+        android:src="@drawable/calculator_drawable"
         app:backgroundTint="@color/colorAccent"
         app:elevation="8dp"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/clear_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:text="Clear Field"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintLeft_toLeftOf="@+id/editText"
-        app:layout_constraintTop_toTopOf="@+id/submit_input"
-        app:layout_constraintVertical_bias="0.92" />
+        app:layout_constraintBottom_toBottomOf="@id/submit_input"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/submit_input" />
 
 </android.support.constraint.ConstraintLayout>
 

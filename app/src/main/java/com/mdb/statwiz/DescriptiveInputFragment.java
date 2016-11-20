@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * Created by victorsun on 11/13/16.
+ */
 
 public class DescriptiveInputFragment extends Fragment implements View.OnClickListener {
     public static final String LIST_KEY = "listKey";
@@ -75,14 +78,15 @@ public class DescriptiveInputFragment extends Fragment implements View.OnClickLi
                 try {
                     for (String input : splitInputString)
                         inputAsNumbers.add(Double.parseDouble(input));
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, new DescriptiveOutputFragment())
+                            .addToBackStack("inputToOutput").commit();
+
                 } catch (Exception e) {
                     Toast.makeText(getActivity().getApplicationContext(),
                             "Incorrect number format!", Toast.LENGTH_LONG).show();
                 }
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, new DescriptiveOutputFragment())
-                        .addToBackStack("inputToOutput").commit();
                 break;
         }
     }
