@@ -1,4 +1,4 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.mdb.statwiz.R;
 
 import java.util.Locale;
 

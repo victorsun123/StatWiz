@@ -1,4 +1,4 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.adapters;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.mdb.statwiz.fragments.FormInputFragment;
+import com.mdb.statwiz.utils.Function;
+import com.mdb.statwiz.activities.MainActivity;
+import com.mdb.statwiz.R;
 
 import java.util.List;
 

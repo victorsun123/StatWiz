@@ -1,4 +1,4 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,11 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.mdb.statwiz.R;
+import com.mdb.statwiz.adapters.DescriptiveAdapter;
+
 import java.util.ArrayList;
 
 /**
  * Created by victorsun on 11/13/16.
  */
+
 public class DescriptiveOutputFragment extends Fragment {
 
     public ArrayList<String> properties;
