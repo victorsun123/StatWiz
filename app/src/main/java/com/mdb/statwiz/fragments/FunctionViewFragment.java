@@ -1,4 +1,4 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,9 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.mdb.statwiz.R;
+import com.mdb.statwiz.activities.MainActivity;
+import com.mdb.statwiz.adapters.FunctionViewAdapter;
+import com.mdb.statwiz.utils.FunctionsList;
 
 public class FunctionViewFragment extends Fragment {
     private RecyclerView mRecyclerView;

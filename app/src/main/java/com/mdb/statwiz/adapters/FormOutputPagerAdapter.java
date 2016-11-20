@@ -1,8 +1,10 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.mdb.statwiz.fragments.FormOutputFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;

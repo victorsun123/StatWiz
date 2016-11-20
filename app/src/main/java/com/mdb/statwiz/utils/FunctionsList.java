@@ -1,4 +1,4 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
