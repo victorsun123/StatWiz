@@ -29,7 +29,7 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.form_input_page, container, false);
+        View layout = inflater.inflate(R.layout.form_page, container, false);
         mRecyclerView = (RecyclerView) layout.findViewById(R.id.form_input_list);
         outputPager = (ViewPager) layout.findViewById(R.id.output_pager);
         left = (FloatingActionButton) layout.findViewById(R.id.form_input_left);
