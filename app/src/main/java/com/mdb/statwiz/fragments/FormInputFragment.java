@@ -38,12 +38,6 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
         outputPager = (ViewPager) layout.findViewById(R.id.output_pager);
         left = (FloatingActionButton) layout.findViewById(R.id.form_input_left);
         right = (FloatingActionButton) layout.findViewById(R.id.form_input_right);
-        return layout;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
         // Initialize RecyclerView
         List<String> testList = new ArrayList<>(1);
@@ -63,6 +57,8 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
         // Initializes left/right buttons for ViewPager
         left.setOnClickListener(this);
         right.setOnClickListener(this);
+
+        return layout;
     }
 
     @Override
