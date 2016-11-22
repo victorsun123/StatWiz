@@ -1,4 +1,4 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.utils;
 
 import java.util.List;
 
@@ -9,12 +9,9 @@ import java.util.List;
 public class Function {
     public String name;
     public List<String> inputs;
-    public List<String> outputs;
 
-    public Function(String name, List<String> inputs, List<String> outputs) {
+    public Function(String name, List<String> inputs) {
         this.name = name;
         this.inputs = inputs;
-        this.outputs = outputs;
     }
-
 }

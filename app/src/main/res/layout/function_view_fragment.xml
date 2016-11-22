@@ -5,11 +5,11 @@
     android:id="@+id/function_view_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mdb.statwiz.FunctionViewFragment">
+    tools:context="com.mdb.statwiz.fragments.FunctionViewFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/function_list_recycler_view"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

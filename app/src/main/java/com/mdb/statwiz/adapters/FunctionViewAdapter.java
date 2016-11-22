@@ -1,6 +1,8 @@
-package com.mdb.statwiz;
+package com.mdb.statwiz.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,10 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.mdb.statwiz.R;
+import com.mdb.statwiz.activities.MainActivity;
+import com.mdb.statwiz.fragments.FormInputFragment;
+import com.mdb.statwiz.utils.Function;
 
 import java.util.List;
 
@@ -60,6 +66,23 @@ public class FunctionViewAdapter extends RecyclerView.Adapter<FunctionViewAdapte
 
             letterView = (ImageView) v.findViewById(R.id.function_item_letter);
             itemName = (TextView) v.findViewById(R.id.function_item_name);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager manager = ((MainActivity) context).getSupportFragmentManager();
+                    FormInputFragment formInputFragment = new FormInputFragment();
+
+                    String functionName = ((TextView) v.findViewById(R.id.function_item_name)).getText().toString();
+                    Bundle args = new Bundle();
+                    args.putString(MainActivity.FUNCTIONTYPE, functionName);
+                    formInputFragment.setArguments(args);
+
+                    manager.beginTransaction()
+                            .replace(R.id.fragment_container, formInputFragment)
+                            .addToBackStack("functionView")
+                            .commit();
+                }
+            });
         }
     }
 }
