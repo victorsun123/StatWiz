@@ -24,8 +24,8 @@ import java.util.HashMap;
 
 public class DescriptiveOutputFragment extends Fragment {
 
-    private static final String[] DOUBLE_STATS = {"Median", "Mean", "SD", "Min", "Max", "Range", "Q1", "Q3"};
-    private static final String[] PROPERTIES = {"Count", "Median", "Mean", "Standard Deviation", "Min", "Max", "Range", "Q1", "Q3", "Mode(s)"};
+    private static final String[] DOUBLE_STATS = {"Median", "Mean", "Standard Deviation", "Standard Error", "Variance", "Min", "Max", "Range", "Q1", "Q3", "IQR", "Kurtosis", "Skewness"};
+    private static final String[] PROPERTIES = {"Count", "Median", "Mean", "Standard Deviation", "Standard Error", "Variance", "Min", "Max", "Range", "Q1", "Q3", "IQR", "Kurtosis", "Skewness", "Mode(s)", };
 
     public ArrayList<String> values;
     private RecyclerView resultsRV;
@@ -39,7 +39,7 @@ public class DescriptiveOutputFragment extends Fragment {
 
         HashMap<String, Object> descriptiveFunction = Calculator.descriptiveStats(data);
         values = new ArrayList<>();
-        values.add(Integer.toString(((Double) descriptiveFunction.get("N")).intValue()));
+        values.add(Integer.toString(((Double) descriptiveFunction.get("Count")).intValue()));
         DecimalFormat dfFormat = new DecimalFormat("#.####");
         for (String stat : DOUBLE_STATS)
             values.add(dfFormat.format(descriptiveFunction.get(stat)));
