@@ -23,11 +23,13 @@ public class Calculator {
         calculations.put("Mean", descStats.getMean());
         calculations.put("Max", descStats.getMax());
         calculations.put("Min", descStats.getMin());
+
         calculations.put("Standard Deviation", descStats.getStandardDeviation());
         calculations.put("Median", descStats.getPercentile(50.0));
         calculations.put("Q1", descStats.getPercentile(25.0));
         calculations.put("Q3", descStats.getPercentile(75.0));
         calculations.put("IQR", ((double) calculations.get("Q3") - (double) calculations.get("Q1")));
+
         calculations.put("Range", ((double) calculations.get("Max") - (double) calculations.get("Min")));
         calculations.put("Count", ((Long) descStats.getN()).doubleValue());
         calculations.put("Standard Error", (double)calculations.get("Standard Deviation")/Math.sqrt((double)calculations.get("Count")));
@@ -60,6 +62,9 @@ public class Calculator {
             modesAsString += o.toString() + ", ";
         }
         calculations.put("Mode", modesAsString.substring(0, modesAsString.length() - 2));
+        calculations.put("Mode", modes);
+        calculations.put("Kurtosis", descStats.getKurtosis());
+        calculations.put("Skewness", descStats.getSkewness());
 
         return calculations;
     }
@@ -91,7 +96,15 @@ public class Calculator {
     public static HashMap<String, Double> tDist(double degreesOfFreedom, double p) {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         TDistribution tDist = new TDistribution(degreesOfFreedom);
-        calculations.put("Probability", tDist.inverseCumulativeProbability(p));
+        calculations.put("Probability", tDist.cumulativeProbability(p));
+
+        return calculations;
+    }
+
+    public static HashMap<String, Double> inverseT(double degreesOfFreedom, double CI) {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        TDistribution tDist = new TDistribution(degreesOfFreedom);
+        calculations.put("Probability", tDist.inverseCumulativeProbability(CI));
 
         return calculations;
     }
@@ -116,6 +129,7 @@ public class Calculator {
 
     public static HashMap<String, Double> binomDist(int numberOfTrials, double probablityOfSuccess, int x)
     {
+
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         BinomialDistribution biDist = new BinomialDistribution(numberOfTrials, probablityOfSuccess);
         //P(X = x)
@@ -129,6 +143,7 @@ public class Calculator {
 
     public static HashMap<String, Double> geomDist(int numberOfTrials, double probablityOfSuccess, int x)
     {
+
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         GeometricDistribution geoDist = new GeometricDistribution(probablityOfSuccess);
         //P(X = x)
@@ -139,4 +154,5 @@ public class Calculator {
 
         return calculations;
     }
+
 }
