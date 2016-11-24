@@ -2,8 +2,10 @@ package com.mdb.statwiz.utils;
 
 import org.apache.commons.math3.distribution.BinomialDistribution;
 import org.apache.commons.math3.distribution.ChiSquaredDistribution;
+import org.apache.commons.math3.distribution.FDistribution;
 import org.apache.commons.math3.distribution.GeometricDistribution;
 import org.apache.commons.math3.distribution.NormalDistribution;
+import org.apache.commons.math3.distribution.PoissonDistribution;
 import org.apache.commons.math3.distribution.TDistribution;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
@@ -64,79 +66,167 @@ public class Calculator {
         return calculations;
     }
 
-    public static HashMap<String, Double> normalDistProb(double mean, double sd, double x) {
-        HashMap<String, Double> calculations = normalDistProb(mean, sd, Double.NEGATIVE_INFINITY, x);
+
+
+    public static HashMap<String, Double> normalDistribution(double mean, double sd, double x) {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        NormalDistribution normDist = new NormalDistribution(mean, sd);
+        calculations.put("NormalPDF", normDist.density(x));
+        calculations.put("NormalCDF", normDist.cumulativeProbability(x));
         double zScore = (x - mean) / sd;
         calculations.put("ZScore", zScore);
 
         return calculations;
     }
 
-    public static HashMap<String, Double> normalDistProb(double mean, double sd, double x0, double x1) {
+    public static HashMap<String, Double> normalCDF(double mean, double sd, double x0, double x1) {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         NormalDistribution normDist = new NormalDistribution(mean, sd);
-        calculations.put("Probability", normDist.probability(x0, x1));
+        calculations.put("NormalCDFBounds", normDist.probability(x0, x1));
+
+        return calculations;
+
+    }
+
+    public static HashMap<String, Double> inverseNorm(double mean, double sd, double p) {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        NormalDistribution normDist = new NormalDistribution(mean, sd);
+        calculations.put("InverseNormal", normDist.inverseCumulativeProbability(p));
 
         return calculations;
     }
 
-    public static HashMap<String, Double> inverseNorm(double mean, double sd, double cumDist) {
-        HashMap<String, Double> calculations = new HashMap<String, Double>();
-        NormalDistribution normDist = new NormalDistribution(mean, sd);
-        calculations.put("Inverse Probability", normDist.inverseCumulativeProbability(cumDist));
-
-        return calculations;
-    }
-
-    public static HashMap<String, Double> tDist(double degreesOfFreedom, double p) {
+    public static HashMap<String, Double> tDistribution(double degreesOfFreedom, double x) {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         TDistribution tDist = new TDistribution(degreesOfFreedom);
-        calculations.put("Probability", tDist.inverseCumulativeProbability(p));
+        calculations.put("tPDF", tDist.density(x));
+        calculations.put("tCDF", tDist.cumulativeProbability(x));
+
 
         return calculations;
     }
 
-    public static HashMap<String, Double> inverseT(double degreesOfFreedom,double CI)
+    public static HashMap<String, Double> tCDF(double degreesOfFreedom, double x0, double x1) {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        TDistribution tDist = new TDistribution(degreesOfFreedom);
+        calculations.put("tCDFBounds", tDist.probability(x0,x1));
+
+        return calculations;
+    }
+
+
+    public static HashMap<String, Double> inverseT(double degreesOfFreedom,double p)
     {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         TDistribution tDist = new TDistribution(degreesOfFreedom);
-        calculations.put("Probability", tDist.inverseCumulativeProbability(CI));
+        calculations.put("Inverset", tDist.inverseCumulativeProbability(p));
 
         return calculations;
     }
 
 
-    public static HashMap<String, Double> chiSquareDist(double chiSquare, double degreesOfFreedom) {
+    public static HashMap<String, Double> chiSquareDist(double degreesOfFreedom, double x) {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         ChiSquaredDistribution chiDist = new ChiSquaredDistribution(degreesOfFreedom);
-        calculations.put("Probability", chiDist.cumulativeProbability(chiSquare));
+        calculations.put("ChiSqPDF", chiDist.density(x));
+        calculations.put("ChiSqCDF", chiDist.cumulativeProbability(x));
 
         return calculations;
     }
 
-    public static HashMap<String, Double> binomDist(int numberOfTrials, double probablityOfSuccess, int x)
+    public static HashMap<String, Double> chiSquareCDF(double degreesOfFreedom, double x0, double x1) {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        ChiSquaredDistribution chiDist = new ChiSquaredDistribution(degreesOfFreedom);
+        calculations.put("ChiSqCDFBounds", chiDist.probability(x0,x1));
+
+        return calculations;
+    }
+    public static HashMap<String, Double> binomialDist(int numberOfTrials, double probabilityOfSuccess, int x)
     {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
-        BinomialDistribution biDist = new BinomialDistribution(numberOfTrials, probablityOfSuccess);
+        BinomialDistribution biDist = new BinomialDistribution(numberOfTrials, probabilityOfSuccess);
         //P(X = x)
-        calculations.put("Probability", biDist.probability(x));
+        calculations.put("BinomialPDF", biDist.probability(x));
         //P(X <= x)
-        calculations.put("Cumulative Probability", biDist.cumulativeProbability(x) + (double) calculations.get("Probabilty"));
+        calculations.put("BinomialCDF", biDist.cumulativeProbability(x));
         calculations.put("Mean", biDist.getNumericalMean());
 
         return calculations;
     }
 
-    public static HashMap<String, Double> geomDist(int numberOfTrials, double probablityOfSuccess, int x)
+    public static HashMap<String, Double> binomialCDF(int numberOfTrials, double probabilityOfSuccess, int x0, int x1)
     {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
-        GeometricDistribution geoDist = new GeometricDistribution(probablityOfSuccess);
-        //P(X = x)
-        calculations.put("Probability", geoDist.probability(x));
-        //P(X <= x)
-        calculations.put("Cumulative Probability", geoDist.cumulativeProbability(x) + (double) calculations.get("Probabilty"));
+        BinomialDistribution biDist = new BinomialDistribution(numberOfTrials, probabilityOfSuccess);
+
+        calculations.put("BinomialCDFBounds", biDist.cumulativeProbability(x0,x1));
+        calculations.put("Mean", biDist.getNumericalMean());
+
+        return calculations;
+    }
+
+
+    public static HashMap<String, Double> geometricDist(int numberOfTrials, double probabilityOfSuccess, int x)
+    {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        GeometricDistribution geoDist = new GeometricDistribution(probabilityOfSuccess);
+        calculations.put("GeometricPDF", geoDist.probability(x));
+        calculations.put("GeometricCDF", geoDist.cumulativeProbability(x));
         calculations.put("Mean", geoDist.getNumericalMean());
 
         return calculations;
     }
+
+    public static HashMap<String, Double> geometricCDF(int numberOfTrials, double probabilityOfSuccess, int x0, int x1)
+    {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        GeometricDistribution geoDist = new GeometricDistribution(probabilityOfSuccess);
+        calculations.put("GeometricCDF", geoDist.cumulativeProbability(x0,x1));
+        calculations.put("Mean", geoDist.getNumericalMean());
+
+        return calculations;
+    }
+
+    public static HashMap<String, Double> poissonDist(double mean, int x)
+    {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        PoissonDistribution poissonDist = new PoissonDistribution(mean);
+        calculations.put("poissonPDF", poissonDist.probability(x));
+        calculations.put("poissonCDF", poissonDist.cumulativeProbability(x));
+
+        return calculations;
+    }
+
+    public static HashMap<String, Double> poissonCDF(double mean, int x0, int x1)
+    {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        PoissonDistribution poissonDist = new PoissonDistribution(mean);
+        calculations.put("poissonCDF", poissonDist.cumulativeProbability(x0,x1));
+
+        return calculations;
+    }
+
+
+    public static HashMap<String, Double> FDist(double numeratordf, double denominatordf, double x ){
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        FDistribution FDist = new FDistribution(numeratordf,denominatordf);
+        calculations.put("FPDF", FDist.density(x));
+        calculations.put("FCDF", FDist.cumulativeProbability(x));
+        calculations.put("Mean", FDist.getNumericalMean());
+
+
+        return calculations;
+    }
+
+    public static HashMap<String, Double> FCDF(double numeratordf, double denominatordf, double x0, double x1 ){
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        FDistribution FDist = new FDistribution(numeratordf,denominatordf);
+        calculations.put("FCDF", FDist.probability(x0,x1));
+        calculations.put("Mean", FDist.getNumericalMean());
+
+
+        return calculations;
+    }
+
+
 }
