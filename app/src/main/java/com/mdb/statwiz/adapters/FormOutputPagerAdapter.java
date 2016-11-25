@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.mdb.statwiz.fragments.FormOutputFragment;
+import com.mdb.statwiz.utils.Tuple;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,15 +44,5 @@ public class FormOutputPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return outputs.get(position).key;
-    }
-
-    private class Tuple<K, V> {
-        final K key;
-        final V value;
-
-        Tuple(K key, V value) {
-            this.key = key;
-            this.value = value;
-        }
     }
 }

@@ -45,7 +45,7 @@ public class DescriptiveOutputFragment extends Fragment {
             values.add(dfFormat.format(descriptiveFunction.get(stat)));
         values.add((String) descriptiveFunction.get("Mode"));
 
-        resultsRV = (RecyclerView) layout.findViewById(R.id.recyclerView);
+        resultsRV = (RecyclerView) layout.findViewById(R.id.sampling_recycler_view);
         resultsRV.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new DescriptiveAdapter(getContext(), Arrays.asList(PROPERTIES), values);
         resultsRV.setAdapter(adapter);
