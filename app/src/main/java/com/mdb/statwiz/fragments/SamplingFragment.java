@@ -11,22 +11,22 @@ import android.webkit.WebView;
 
 import com.mdb.statwiz.R;
 
-public class ReferencesFragment extends Fragment {
-    private WebView referencesWebView;
+public class SamplingFragment extends Fragment {
+    private WebView samplingWebView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.webview_fragment, container, false);
-        referencesWebView = (WebView) layout.findViewById(R.id.webview);
+        samplingWebView = (WebView) layout.findViewById(R.id.webview);
         return layout;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        WebSettings webSettings = referencesWebView.getSettings();
+        WebSettings webSettings = samplingWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        referencesWebView.loadUrl("file:///android_asset/references.html");
+        samplingWebView.loadUrl("file:///android_asset/sampling.html");
     }
 }
