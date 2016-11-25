@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity
 
     public static final String FUNCTIONTYPE = "FUNCTION_TYPE";
     public static final String DISTRIBUTIONS = "distributions";
+    public static final String PROBABILITY = "probability";
+    public int currentFragment = -1;
     private FragmentManager fragmentManager;
 
     @Override
@@ -74,18 +76,27 @@ public class MainActivity extends AppCompatActivity
                         .replace(R.id.fragment_container, descriptiveInputFragment).addToBackStack("input").commit();
                 break;
             case R.id.distributions:
-                if (currentlyVisible instanceof FunctionViewFragment)
+                if (currentlyVisible instanceof FunctionViewFragment && currentlyVisible.getArguments().getString(FUNCTIONTYPE)==DISTRIBUTIONS)
                     break;
-                FunctionViewFragment functionViewFragment = new FunctionViewFragment();
-                Bundle args = new Bundle();
-                args.putString(FUNCTIONTYPE, DISTRIBUTIONS);
-                functionViewFragment.setArguments(args);
+                FunctionViewFragment functionViewFragment1 = new FunctionViewFragment();
+                Bundle args1 = new Bundle();
+                args1.putString(FUNCTIONTYPE, DISTRIBUTIONS);
+                functionViewFragment1.setArguments(args1);
                 fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, functionViewFragment).addToBackStack(DISTRIBUTIONS).commit();
+                        .replace(R.id.fragment_container, functionViewFragment1).addToBackStack(DISTRIBUTIONS).commit();
                 break;
             case R.id.regression:
                 break;
+
             case R.id.probability:
+                if (currentlyVisible instanceof FunctionViewFragment && currentlyVisible.getArguments().getString(FUNCTIONTYPE)==PROBABILITY)
+                    break;
+                FunctionViewFragment functionViewFragment2 = new FunctionViewFragment();
+                Bundle args2 = new Bundle();
+                args2.putString(FUNCTIONTYPE, PROBABILITY);
+                functionViewFragment2.setArguments(args2);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, functionViewFragment2).addToBackStack(PROBABILITY).commit();
                 break;
             case R.id.sampling:
                 break;

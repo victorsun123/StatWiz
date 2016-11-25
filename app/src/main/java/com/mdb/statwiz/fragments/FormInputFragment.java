@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mdb.statwiz.R;
+import com.mdb.statwiz.activities.MainActivity;
 import com.mdb.statwiz.adapters.FormInputAdapter;
 import com.mdb.statwiz.adapters.FormOutputPagerAdapter;
 
@@ -29,6 +30,7 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
     private ViewPager outputPager;
     private FormOutputPagerAdapter outputPagerAdapter;
     private FloatingActionButton left, right;
+    private String functionName;
 
     @Nullable
     @Override
@@ -39,10 +41,70 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
         left = (FloatingActionButton) layout.findViewById(R.id.form_input_left);
         right = (FloatingActionButton) layout.findViewById(R.id.form_input_right);
 
+        functionName = getArguments().getString(MainActivity.FUNCTIONTYPE);
+
         // Initialize RecyclerView
-        List<String> testList = new ArrayList<>(1);
-        testList.add("jkl;");
-        testList.add("qwerty");
+        List<String> testList = new ArrayList<>();
+
+        switch(functionName) {
+            case "Normal PDF":
+                testList.add("Mean");
+                testList.add("Standard Deviation");
+                testList.add("X-Value");
+                break;
+            case "Normal CDF":
+                testList.add("Mean");
+                testList.add("Standard Deviation");
+                testList.add("Lower Bound");
+                testList.add("Upper Bound");
+                break;
+            case "Inverse Normal":
+                testList.add("Mean");
+                testList.add("Standard Deviation");
+                testList.add("Area");
+                break;
+            case "t PDF":
+                testList.add("Degrees of Freedom");
+                testList.add("X-Value");
+                break;
+            case "t CDF":
+                testList.add("Degrees of Freedom");
+                testList.add("Lower Bound");
+                testList.add("Upper Bound");
+                break;
+            case "Inverse t":
+                testList.add("Degrees of Freedom");
+                testList.add("Area");
+                break;
+            case "Chi Squared PDF":
+                testList.add("Degrees of Freedom");
+                testList.add("X-Value");
+                break;
+            case "Chi Squared CDF":
+                testList.add("Degrees of Freedom");
+                testList.add("Lower Bound");
+                testList.add("Upper Bound");
+                break;
+            case "Inverse Chi Squared":
+
+                break;
+            case "F PDF":
+            case "F CDF":
+            case "Inverse F":
+            case "Binomial PDF":
+
+            case "Binomial CDF":
+            case "Geometric PDF":
+            case "Geometric CDF":
+            case "Poisson PDF":
+            case "Poisson CDF":
+            case "Permutations":
+            case "Combinations":
+            case "Factorial":
+
+
+        }
+       
         mAdapter = new FormInputAdapter(getActivity(), testList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
