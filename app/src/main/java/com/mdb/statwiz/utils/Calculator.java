@@ -109,7 +109,7 @@ public class Calculator {
     public static HashMap<String, Double> tCDF(double degreesOfFreedom, double x0, double x1) {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         TDistribution tDist = new TDistribution(degreesOfFreedom);
-        calculations.put("tCDFBounds", tDist.probability(x0,x1));
+        calculations.put("tCDFBounds", tDist.probability(x0, x1));
 
         return calculations;
     }
@@ -141,6 +141,7 @@ public class Calculator {
 
         return calculations;
     }
+
     public static HashMap<String, Double> binomialDist(int numberOfTrials, double probabilityOfSuccess, int x)
     {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
@@ -172,6 +173,7 @@ public class Calculator {
         GeometricDistribution geoDist = new GeometricDistribution(probabilityOfSuccess);
         calculations.put("GeometricPDF", geoDist.probability(x));
         calculations.put("GeometricCDF", geoDist.cumulativeProbability(x));
+
         calculations.put("Mean", geoDist.getNumericalMean());
 
         return calculations;
@@ -186,6 +188,7 @@ public class Calculator {
 
         return calculations;
     }
+
 
     public static HashMap<String, Double> poissonDist(double mean, int x)
     {
@@ -247,6 +250,5 @@ public class Calculator {
         if (r == 1 || n == (r + 1)) return n;
         return permutation(n, r) / factorial(r);
     }
-
 
 }
