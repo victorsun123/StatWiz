@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./katex.min.css">
+    <script type="text/javascript" src="./katex.min.js"></script>
+    <script type="text/javascript" src="./contrib/auto-render.min.js"></script>
+    <style>
+        div {
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<h4>Descriptive Stats</h4>
+
+<div class="equation" data-expr="\bar{x}=\frac{\sum x_i}{n}"></div>
+
+<div class="equation" data-expr="s_x = \sqrt{\frac{1}{n-1}\sum (x_i-\bar{x})^2}"></div>
+
+<div class="equation"
+     data-expr="s_p = \sqrt{\frac{(n_i - 1)s_1^2 + (n_2 - 1)s_2^2}{(n_1-1)+(n_2-1)}}"></div>
+
+<div class="equation" data-expr="\hat{y}=b_0+b_1 x"></div>
+
+<div class="equation"
+     data-expr="b_1 = \frac{\sum(x_i-\bar{x})(y_i-\bar{y})}{\sum(x_i-\bar{x})^2}"></div>
+
+<div class="equation" data-expr="b_0=\bar{y} - b_1\bar{x}"></div>
+
+<div class="equation"
+     data-expr="r=\frac{1}{n-1}\sum\left(\frac{x_i-\bar{x}}{s_x}\right)\left(\frac{y_i-\bar{y}}{s_y}\right)"></div>
+
+<div class="equation" data-expr="b_1=r\frac{s_y}{s_x}"></div>
+
+<div class="equation"
+     data-expr="s_{b_1}=\frac{\sqrt{\frac{\sum(y_i-\hat{y}_i)^2}{n-2}}}{\sqrt{\sum(x_i-\bar{x})^2}}"></div>
+
+<h4>Probability</h4>
+
+<div class="equation" data-expr="P(A\cup B)=P(A)+P(B)-P(A\cap B)"></div>
+
+<div class="equation" data-expr="P(A|B)=\frac{P(A\cap B)}{P(B)}"></div>
+
+<div class="equation" data-expr="E(X)=\mu_X=\sum x_i p_i"></div>
+
+<div class="equation" data-expr="Var(X)=\sigma_x^2=\sum(x_i-\mu_x)^2p_i"></div>
+
+<div class="equation" data-expr="P(X=k)= {n\choose k} p^k(1-p)^{n-k}"></div>
+
+<div class="equation" data-expr="\mu_x = np"></div>
+
+<div class="equation" data-expr="\sigma_x=\sqrt{np(1-p)}"></div>
+
+<div class="equation" data-expr="\mu_{\hat{p}}=p"></div>
+
+<div class="equation" data-expr="\sigma_{\hat{p}}=\sqrt{\frac{p(1-p)}{n}}"></div>
+
+<div class="equation" data-expr="\mu_{\bar{x}}=\mu"></div>
+
+<div class="equation" data-expr="\sigma_{\bar{x}}=\frac{\sigma}{\sqrt{n}}"></div>
+<script type="text/javascript">
+
+            // grab all elements in DOM with the class 'equation'
+            var tex = document.getElementsByClassName("equation");
+            for (var i = 0; i < tex.length; i++) {
+                katex.render(tex.item(i).getAttribute("data-expr"), tex.item(i));
+            }
+
+</script>
+</body>
+</html>
