@@ -27,6 +27,9 @@ public class ReferencesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         WebSettings webSettings = referencesWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setSupportZoom(true);
+        webSettings.setDisplayZoomControls(false);
         referencesWebView.loadUrl("file:///android_asset/references.html");
     }
 }
