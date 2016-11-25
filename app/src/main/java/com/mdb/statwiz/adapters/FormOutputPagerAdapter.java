@@ -17,7 +17,7 @@ import java.util.TreeSet;
  */
 
 public class FormOutputPagerAdapter extends FragmentStatePagerAdapter {
-    private List<Tuple<String, Double>> outputs;
+    public List<Tuple<String, Double>> outputs;
 
     public FormOutputPagerAdapter(FragmentManager manager, HashMap<String, Double> outputs) {
         super(manager);

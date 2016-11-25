@@ -41,9 +41,10 @@ public class FormInputAdapter extends RecyclerView.Adapter<FormInputAdapter.Form
         return inputs.size();
     }
 
-    class FormInputViewHolder extends RecyclerView.ViewHolder {
-        TextInputEditText inputField;
-        TextInputLayout inputLayout;
+
+     public class FormInputViewHolder extends RecyclerView.ViewHolder {
+        public TextInputEditText inputField;
+        public TextInputLayout inputLayout;
 
         public FormInputViewHolder(View v) {
             super(v);
