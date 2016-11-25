@@ -228,21 +228,21 @@ public class Calculator {
         return calculations;
     }
 
-    public static int factorial(int n) {
+    public static long factorial(long n) {
         if (n == 0 || n ==1) return 1;
-        int result = 1;
-        for (int i = 1; i <= n; i++) result *= i;
+        long result = 1;
+        for (long i = 1; i <= n; i++) result *= i;
         return result;
     }
 
-    public static int permutation(int n, int r) {
+    public static long permutation(long n, long r) {
         if (r == 0) return 1;
         if (r == 1) return n;
         if (n == r) return factorial(n);
         return factorial(n) / factorial(n - r);
     }
 
-    public static int combination(int n, int r) {
+    public static long combination(long n, long r) {
         if (r == 0 || n == r) return 1;
         if (r == 1 || n == (r + 1)) return n;
         return permutation(n, r) / factorial(r);
