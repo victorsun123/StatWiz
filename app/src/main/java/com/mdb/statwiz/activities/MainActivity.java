@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
 
         MainContentFragment fragment = new MainContentFragment();
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack("mainContent").commit();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

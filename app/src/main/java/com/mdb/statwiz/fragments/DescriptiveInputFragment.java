@@ -72,19 +72,29 @@ public class DescriptiveInputFragment extends Fragment implements View.OnClickLi
 
                 splitInputString = inputString.split("\\s+");
 
-                inputAsNumbers = new ArrayList<>();
+                inputAsNumbers = new ArrayList<Double>();
                 try {
                     for (String input : splitInputString)
                         inputAsNumbers.add(Double.parseDouble(input));
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, new DescriptiveOutputFragment())
-                            .addToBackStack("inputToOutput").commit();
-
                 } catch (Exception e) {
                     Toast.makeText(getActivity().getApplicationContext(),
                             "Incorrect number format!", Toast.LENGTH_LONG).show();
+                    break;
+
                 }
+
+                double[] primitiveArray = new double[inputAsNumbers.size()];
+                for (int i = 0; i < inputAsNumbers.size(); i++)
+                    primitiveArray[i] = inputAsNumbers.get(i);
+                Bundle bundle = new Bundle();
+                bundle.putDoubleArray("inputAsNumbers", primitiveArray);
+                DescriptiveOutputFragment descriptiveOutput = new DescriptiveOutputFragment();
+                descriptiveOutput.setArguments(bundle);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, descriptiveOutput)
+                        .addToBackStack("inputToOutput").commit();
+
                 break;
         }
     }

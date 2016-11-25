@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.mdb.statwiz.R;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -19,10 +20,10 @@ import java.util.Locale;
 public class DescriptiveAdapter extends RecyclerView.Adapter<DescriptiveAdapter.CustomViewHolder> {
 
     private Context context;
-    private ArrayList<String> properties;
-    private ArrayList<Double> values;
+    private List<String> properties;
+    private List<String> values;
 
-    public DescriptiveAdapter(Context context, ArrayList<String> properties, ArrayList<Double> values) {
+    public DescriptiveAdapter(Context context, List<String> properties, ArrayList<String> values) {
         this.context = context;
         this.properties = properties;
         this.values = values;
@@ -37,7 +38,7 @@ public class DescriptiveAdapter extends RecyclerView.Adapter<DescriptiveAdapter.
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         holder.property.setText(properties.get(position));
-        holder.value.setText(String.format(Locale.getDefault(), "%f", values.get(position)));
+        holder.value.setText(values.get(position));
     }
 
     @Override
