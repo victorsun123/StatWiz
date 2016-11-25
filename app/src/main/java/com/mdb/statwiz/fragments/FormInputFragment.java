@@ -29,8 +29,10 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
     private FormInputAdapter mAdapter;
     private ViewPager outputPager;
     private FormOutputPagerAdapter outputPagerAdapter;
-    private FloatingActionButton left, right;
+    private FloatingActionButton left, right, calculateOutput;
     private String functionName;
+    private List<String> testList;
+    private HashMap<String, Double> testOutputs;
 
     @Nullable
     @Override
@@ -40,11 +42,12 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
         outputPager = (ViewPager) layout.findViewById(R.id.output_pager);
         left = (FloatingActionButton) layout.findViewById(R.id.form_input_left);
         right = (FloatingActionButton) layout.findViewById(R.id.form_input_right);
+        calculateOutput = (FloatingActionButton) layout.findViewById(R.id.calculate_output);
 
         functionName = getArguments().getString(MainActivity.FUNCTIONTYPE);
 
         // Initialize RecyclerView
-        List<String> testList = new ArrayList<>();
+        testList = new ArrayList<>();
 
         switch(functionName) {
             case "Normal PDF":
@@ -143,16 +146,15 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // Initialize ViewPager
-        HashMap<String, Double> testOutputs = new HashMap<>();
-        testOutputs.put("asdf", 123.0);
-        testOutputs.put("jkl;", 456.0);
+        testOutputs = new HashMap<>();
+        testOutputs.put("output", 0.0);
         outputPagerAdapter = new FormOutputPagerAdapter(getActivity().getSupportFragmentManager(), testOutputs);
         outputPager.setAdapter(outputPagerAdapter);
 
         // Initializes left/right buttons for ViewPager
         left.setOnClickListener(this);
         right.setOnClickListener(this);
-
+        calculateOutput.setOnClickListener(this);
         return layout;
     }
 
@@ -165,6 +167,99 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.form_input_right:
                 outputPager.setCurrentItem(outputPager.getCurrentItem() + 1, true);
+                break;
+            case R.id.calculate_output:
+                switch(functionName) {
+                    case "Normal PDF":
+                        testList.add("Mean");
+                        testList.add("Standard Deviation");
+                        testList.add("X-Value");
+                        break;
+                    case "Normal CDF":
+                        testList.add("Mean");
+                        testList.add("Standard Deviation");
+                        testList.add("Lower Bound");
+                        testList.add("Upper Bound");
+                        break;
+                    case "Inverse Normal":
+                        testList.add("Mean");
+                        testList.add("Standard Deviation");
+                        testList.add("Area");
+                        break;
+                    case "t PDF":
+                        testList.add("Degrees of Freedom");
+                        testList.add("X-Value");
+                        break;
+                    case "t CDF":
+                        testList.add("Degrees of Freedom");
+                        testList.add("Lower Bound");
+                        testList.add("Upper Bound");
+                        break;
+                    case "Inverse t":
+                        testList.add("Degrees of Freedom");
+                        testList.add("Area");
+                        break;
+                    case "Chi Squared PDF":
+                        testList.add("Degrees of Freedom");
+                        testList.add("X-Value");
+                        break;
+                    case "Chi Squared CDF":
+                        testList.add("Degrees of Freedom");
+                        testList.add("Lower Bound");
+                        testList.add("Upper Bound");
+                        break;
+                    case "Inverse Chi Squared":
+                        testList.add("Degrees of Freedom");
+                        testList.add("Area");
+                        break;
+                    case "F PDF":
+                        testList.add("Numerator Degrees of Freedom");
+                        testList.add("Denominator Degrees of Freedom");
+                        testList.add("X-Value");
+                        break;
+                    case "F CDF":
+                        testList.add("Numerator Degrees of Freedom");
+                        testList.add("Denominator Degrees of Freedom");
+                        testList.add("Lower Bound");
+                        testList.add("Upper Bound");
+                        break;
+                    case "Inverse F":
+                        testList.add("Numerator Degrees of Freedom");
+                        testList.add("Denominator Degrees of Freedom");
+                        testList.add("Area");
+                        break;
+                    case "Binomial PDF":
+                    case "Geometric PDF":
+                        testList.add("Numerator of Trials");
+                        testList.add("Probability of Success");
+                        testList.add("X-Value");
+                        break;
+                    case "Binomial CDF":
+                    case "Geometric CDF":
+                        testList.add("Numerator of Trials");
+                        testList.add("Probability of Success");
+                        testList.add("Lower Bound");
+                        testList.add("Upper Bound");
+                        break;
+                    case "Poisson PDF":
+                        testList.add("Lambda");
+                        testList.add("X-Value");
+                        break;
+                    case "Poisson CDF":
+                        testList.add("Lambda");
+                        testList.add("Lower Bound");
+                        testList.add("Upper Bound");
+                        break;
+                    case "Permutations":
+                    case "Combinations":
+                        testList.add("n");
+                        testList.add("r");
+                        break;
+                    case "Factorial":
+                        testList.add("n");
+                        break;
+
+                }
                 break;
         }
     }
