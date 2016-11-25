@@ -15,6 +15,9 @@ import com.mdb.statwiz.R;
 import com.mdb.statwiz.fragments.DescriptiveInputFragment;
 import com.mdb.statwiz.fragments.FunctionViewFragment;
 import com.mdb.statwiz.fragments.MainContentFragment;
+import com.mdb.statwiz.fragments.ReferencesFragment;
+import com.mdb.statwiz.fragments.SamplingFragment;
+import com.mdb.statwiz.fragments.TablesFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -88,10 +91,25 @@ public class MainActivity extends AppCompatActivity
             case R.id.probability:
                 break;
             case R.id.sampling:
+                if (currentlyVisible instanceof SamplingFragment)
+                    break;
+                SamplingFragment samplingFragment = new SamplingFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, samplingFragment).addToBackStack("sampling").commit();
                 break;
             case R.id.tables:
+                if (currentlyVisible instanceof TablesFragment)
+                    break;
+                TablesFragment tablesFragment = new TablesFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, tablesFragment).addToBackStack("tables").commit();
                 break;
             case R.id.reference:
+                if (currentlyVisible instanceof ReferencesFragment)
+                    break;
+                ReferencesFragment referencesFragment = new ReferencesFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, referencesFragment).addToBackStack("references").commit();
                 break;
         }
 
