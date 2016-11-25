@@ -82,7 +82,7 @@ public class Calculator {
     public static HashMap<String, Double> normalCDF(double mean, double sd, double x0, double x1) {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         NormalDistribution normDist = new NormalDistribution(mean, sd);
-        calculations.put("NormalCDFBounds", normDist.probability(x0, x1));
+        calculations.put("NormalCDF", normDist.probability(x0, x1));
 
         return calculations;
 
@@ -109,7 +109,7 @@ public class Calculator {
     public static HashMap<String, Double> tCDF(double degreesOfFreedom, double x0, double x1) {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         TDistribution tDist = new TDistribution(degreesOfFreedom);
-        calculations.put("tCDFBounds", tDist.probability(x0, x1));
+        calculations.put("tCDF", tDist.probability(x0, x1));
 
         return calculations;
     }
@@ -137,7 +137,15 @@ public class Calculator {
     public static HashMap<String, Double> chiSquareCDF(double degreesOfFreedom, double x0, double x1) {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         ChiSquaredDistribution chiDist = new ChiSquaredDistribution(degreesOfFreedom);
-        calculations.put("ChiSqCDFBounds", chiDist.probability(x0,x1));
+        calculations.put("ChiSqCDF", chiDist.probability(x0,x1));
+
+        return calculations;
+    }
+
+    public static HashMap<String, Double> inverseChiSquare(double degreesOfFreedom, double p) {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        ChiSquaredDistribution chiDist = new ChiSquaredDistribution(degreesOfFreedom);
+        calculations.put("InverseChiSq", chiDist.inverseCumulativeProbability(p));
 
         return calculations;
     }
@@ -160,7 +168,7 @@ public class Calculator {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         BinomialDistribution biDist = new BinomialDistribution(numberOfTrials, probabilityOfSuccess);
 
-        calculations.put("BinomialCDFBounds", biDist.cumulativeProbability(x0,x1));
+        calculations.put("BinomialCDF", biDist.cumulativeProbability(x0,x1));
         calculations.put("Mean", biDist.getNumericalMean());
 
         return calculations;
@@ -194,8 +202,8 @@ public class Calculator {
     {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         PoissonDistribution poissonDist = new PoissonDistribution(mean);
-        calculations.put("poissonPDF", poissonDist.probability(x));
-        calculations.put("poissonCDF", poissonDist.cumulativeProbability(x));
+        calculations.put("PoissonPDF", poissonDist.probability(x));
+        calculations.put("PoissonCDF", poissonDist.cumulativeProbability(x));
 
         return calculations;
     }
@@ -204,7 +212,7 @@ public class Calculator {
     {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         PoissonDistribution poissonDist = new PoissonDistribution(mean);
-        calculations.put("poissonCDF", poissonDist.cumulativeProbability(x0,x1));
+        calculations.put("PoissonCDF", poissonDist.cumulativeProbability(x0,x1));
 
         return calculations;
     }
@@ -217,7 +225,6 @@ public class Calculator {
         calculations.put("FCDF", FDist.cumulativeProbability(x));
         calculations.put("Mean", FDist.getNumericalMean());
 
-
         return calculations;
     }
 
@@ -227,28 +234,41 @@ public class Calculator {
         calculations.put("FCDF", FDist.probability(x0,x1));
         calculations.put("Mean", FDist.getNumericalMean());
 
+        return calculations;
+    }
+
+    public static HashMap<String, Double> inverseF(double numeratordf, double denominatordf, double p ){
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        FDistribution FDist = new FDistribution(numeratordf,denominatordf);
+        calculations.put("InverseF", FDist.inverseCumulativeProbability(p));
+        calculations.put("Mean", FDist.getNumericalMean());
 
         return calculations;
     }
 
-    public static long factorial(long n) {
+
+
+
+    public static double factorial(long n) {
         if (n == 0 || n ==1) return 1;
         long result = 1;
         for (long i = 1; i <= n; i++) result *= i;
-        return result;
+        return (double) result;
     }
 
-    public static long permutation(long n, long r) {
+    public static double permutation(long n, long r) {
         if (r == 0) return 1;
         if (r == 1) return n;
         if (n == r) return factorial(n);
-        return factorial(n) / factorial(n - r);
+         if (n < r) return 0;
+        return (double)factorial(n) / factorial(n - r);
     }
 
-    public static long combination(long n, long r) {
+    public static double combination(long n, long r) {
+        if (n < r) return 0;
         if (r == 0 || n == r) return 1;
         if (r == 1 || n == (r + 1)) return n;
-        return permutation(n, r) / factorial(r);
+        return (double) permutation(n, r) / factorial(r);
     }
 
 }

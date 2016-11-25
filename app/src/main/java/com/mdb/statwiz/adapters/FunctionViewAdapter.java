@@ -29,6 +29,7 @@ public class FunctionViewAdapter extends RecyclerView.Adapter<FunctionViewAdapte
     List<Function> functionsList;
     ColorGenerator generator = ColorGenerator.MATERIAL;
 
+
     public FunctionViewAdapter(Context context, List<Function> functions) {
         this.context = context;
         this.functionsList = functions;
@@ -37,10 +38,17 @@ public class FunctionViewAdapter extends RecyclerView.Adapter<FunctionViewAdapte
     @Override
     public void onBindViewHolder(FunctionViewHolder holder, int position) {
         Function f = functionsList.get(position);
-        String letter = String.valueOf(f.name.charAt(0));
-
+        //String letter = String.valueOf(f.name.charAt(0));
+        String letter = "";
+        if(f.name.contains("CDF")){
+            letter = "C";
+        }
+        else if(f.name.contains("PDF")){
+            letter = "P";
+        }
+        else letter = String.valueOf(f.name.charAt(0));
         TextDrawable drawable = TextDrawable.builder()
-                .buildRound(letter, generator.getRandomColor());
+                .buildRound(letter, f.color);
 
         holder.letterView.setImageDrawable(drawable);
         holder.itemName.setText(f.name);

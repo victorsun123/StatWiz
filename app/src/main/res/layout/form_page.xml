@@ -46,7 +46,7 @@
                 android:id="@+id/output_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorAccent" />
+                android:background="@color/colorPrimary" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/form_input_left"
