@@ -109,7 +109,7 @@ public class Calculator {
     public static HashMap<String, Double> tCDF(double degreesOfFreedom, double x0, double x1) {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         TDistribution tDist = new TDistribution(degreesOfFreedom);
-        calculations.put("tCDFBounds", tDist.probability(x0, x1));
+        calculations.put("tCDF ", tDist.probability(x0, x1));
 
         return calculations;
     }
@@ -137,7 +137,15 @@ public class Calculator {
     public static HashMap<String, Double> chiSquareCDF(double degreesOfFreedom, double x0, double x1) {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         ChiSquaredDistribution chiDist = new ChiSquaredDistribution(degreesOfFreedom);
-        calculations.put("ChiSqCDFBounds", chiDist.probability(x0,x1));
+        calculations.put("ChiSqCDF", chiDist.probability(x0,x1));
+
+        return calculations;
+    }
+
+    public static HashMap<String, Double> inverseChiSquare(double degreesOfFreedom, double p) {
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        ChiSquaredDistribution chiDist = new ChiSquaredDistribution(degreesOfFreedom);
+        calculations.put("InverseChiSq", chiDist.inverseCumulativeProbability(p));
 
         return calculations;
     }
@@ -160,7 +168,7 @@ public class Calculator {
         HashMap<String, Double> calculations = new HashMap<String, Double>();
         BinomialDistribution biDist = new BinomialDistribution(numberOfTrials, probabilityOfSuccess);
 
-        calculations.put("BinomialCDFBounds", biDist.cumulativeProbability(x0,x1));
+        calculations.put("BinomialCDF", biDist.cumulativeProbability(x0,x1));
         calculations.put("Mean", biDist.getNumericalMean());
 
         return calculations;
@@ -217,7 +225,6 @@ public class Calculator {
         calculations.put("FCDF", FDist.cumulativeProbability(x));
         calculations.put("Mean", FDist.getNumericalMean());
 
-
         return calculations;
     }
 
@@ -227,9 +234,20 @@ public class Calculator {
         calculations.put("FCDF", FDist.probability(x0,x1));
         calculations.put("Mean", FDist.getNumericalMean());
 
+        return calculations;
+    }
+
+    public static HashMap<String, Double> inverseF(double numeratordf, double denominatordf, double p ){
+        HashMap<String, Double> calculations = new HashMap<String, Double>();
+        FDistribution FDist = new FDistribution(numeratordf,denominatordf);
+        calculations.put("InverseF", FDist.inverseCumulativeProbability(p));
+        calculations.put("Mean", FDist.getNumericalMean());
 
         return calculations;
     }
+
+
+
 
     public static long factorial(long n) {
         if (n == 0 || n ==1) return 1;

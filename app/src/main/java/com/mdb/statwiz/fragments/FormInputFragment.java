@@ -86,22 +86,55 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
                 testList.add("Upper Bound");
                 break;
             case "Inverse Chi Squared":
-
+                testList.add("Degrees of Freedom");
+                testList.add("Area");
                 break;
             case "F PDF":
+                testList.add("Numerator Degrees of Freedom");
+                testList.add("Denominator Degrees of Freedom");
+                testList.add("X-Value");
+                break;
             case "F CDF":
+                testList.add("Numerator Degrees of Freedom");
+                testList.add("Denominator Degrees of Freedom");
+                testList.add("Lower Bound");
+                testList.add("Upper Bound");
+                break;
             case "Inverse F":
+                testList.add("Numerator Degrees of Freedom");
+                testList.add("Denominator Degrees of Freedom");
+                testList.add("Area");
+                break;
             case "Binomial PDF":
-
-            case "Binomial CDF":
             case "Geometric PDF":
+                testList.add("Numerator of Trials");
+                testList.add("Probability of Success");
+                testList.add("X-Value");
+                break;
+            case "Binomial CDF":
             case "Geometric CDF":
+                testList.add("Numerator of Trials");
+                testList.add("Probability of Success");
+                testList.add("Lower Bound");
+                testList.add("Upper Bound");
+                break;
             case "Poisson PDF":
+                testList.add("Lambda");
+                testList.add("X-Value");
+                break;
             case "Poisson CDF":
+                testList.add("Lambda");
+                testList.add("Lower Bound");
+                testList.add("Upper Bound");
+                break;
             case "Permutations":
             case "Combinations":
+                testList.add("n");
+                testList.add("r");
+                break;
             case "Factorial":
-
+                testList.add("n");
+                break;
 
         }
        
