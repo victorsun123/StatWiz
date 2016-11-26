@@ -11,7 +11,6 @@ import com.mdb.statwiz.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by victorsun on 11/13/16.

@@ -40,13 +40,11 @@ public class FunctionViewAdapter extends RecyclerView.Adapter<FunctionViewAdapte
         Function f = functionsList.get(position);
         //String letter = String.valueOf(f.name.charAt(0));
         String letter = "";
-        if(f.name.contains("CDF")){
+        if (f.name.contains("CDF")) {
             letter = "C";
-        }
-        else if(f.name.contains("PDF")){
+        } else if (f.name.contains("PDF")) {
             letter = "P";
-        }
-        else letter = String.valueOf(f.name.charAt(0));
+        } else letter = String.valueOf(f.name.charAt(0));
         TextDrawable drawable = TextDrawable.builder()
                 .buildRound(letter, f.color);
 
