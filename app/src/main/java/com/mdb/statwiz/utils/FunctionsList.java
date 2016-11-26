@@ -36,30 +36,30 @@ public class FunctionsList {
             Color.parseColor("#9E9E9E"),    //gray
     };
     public static final Function[] DISTRIBUTIONS = {
-            new Function("Normal PDF", new ArrayList<String>(0), COLORS[0]),
-            new Function("Normal CDF", new ArrayList<String>(0), COLORS[0]),
-            new Function("Inverse Normal", new ArrayList<String>(0), COLORS[0]),
-            new Function("t PDF", new ArrayList<String>(0), COLORS[1]),
-            new Function("t CDF", new ArrayList<String>(0), COLORS[1]),
-            new Function("Inverse t", new ArrayList<String>(0), COLORS[1]),
-            new Function("Chi Squared PDF", new ArrayList<String>(0), COLORS[2]),
-            new Function("Chi Squared CDF", new ArrayList<String>(0), COLORS[2]),
-            new Function("Inverse Chi Squared", new ArrayList<String>(0), COLORS[2]),
-            new Function("F PDF", new ArrayList<String>(0), COLORS[3]),
-            new Function("F CDF", new ArrayList<String>(0), COLORS[3]),
-            new Function("Inverse F", new ArrayList<String>(0), COLORS[3]),
-            new Function("Binomial PDF", new ArrayList<String>(0), COLORS[4]),
-            new Function("Binomial CDF", new ArrayList<String>(0), COLORS[4]),
-            new Function("Geometric PDF", new ArrayList<String>(0), COLORS[5]),
-            new Function("Geometric CDF", new ArrayList<String>(0), COLORS[5]),
-            new Function("Poisson PDF", new ArrayList<String>(0), COLORS[6]),
-            new Function("Poisson CDF", new ArrayList<String>(0), COLORS[6]),
+            new Function("Normal PDF", COLORS[0]),
+            new Function("Normal CDF", COLORS[0]),
+            new Function("Inverse Normal", COLORS[0]),
+            new Function("t PDF", COLORS[1]),
+            new Function("t CDF", COLORS[1]),
+            new Function("Inverse t", COLORS[1]),
+            new Function("Chi Squared PDF", COLORS[2]),
+            new Function("Chi Squared CDF", COLORS[2]),
+            new Function("Inverse Chi Squared", COLORS[2]),
+            new Function("F PDF", COLORS[3]),
+            new Function("F CDF", COLORS[3]),
+            new Function("Inverse F", COLORS[3]),
+            new Function("Binomial PDF", COLORS[4]),
+            new Function("Binomial CDF", COLORS[4]),
+            new Function("Geometric PDF", COLORS[5]),
+            new Function("Geometric CDF", COLORS[5]),
+            new Function("Poisson PDF", COLORS[6]),
+            new Function("Poisson CDF", COLORS[6]),
     };
 
     public static final Function[] PROBABILITY = {
-            new Function("Permutations", new ArrayList<String>(0), COLORS[7]),
-            new Function("Combinations", new ArrayList<String>(0), COLORS[8]),
-            new Function("Factorial", new ArrayList<String>(0), COLORS[9]),
+            new Function("Permutations", COLORS[7]),
+            new Function("Combinations", COLORS[8]),
+            new Function("Factorial", COLORS[9]),
     };
 
     public static List<Function> getFunctionsList(String functionType) {
