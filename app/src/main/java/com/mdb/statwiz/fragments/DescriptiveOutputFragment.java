@@ -16,7 +16,7 @@ import com.mdb.statwiz.utils.Calculator;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created by victorsun on 11/13/16.
@@ -25,7 +25,7 @@ import java.util.HashMap;
 public class DescriptiveOutputFragment extends Fragment {
 
     private static final String[] DOUBLE_STATS = {"Median", "Mean", "Standard Deviation", "Standard Error", "Variance", "Min", "Max", "Range", "Q1", "Q3", "IQR", "Kurtosis", "Skewness"};
-    private static final String[] PROPERTIES = {"Count", "Median", "Mean", "Standard Deviation", "Standard Error", "Variance", "Min", "Max", "Range", "Q1", "Q3", "IQR", "Kurtosis", "Skewness", "Mode(s)", };
+    private static final String[] PROPERTIES = {"Count", "Median", "Mean", "Standard Deviation", "Standard Error", "Variance", "Min", "Max", "Range", "Q1", "Q3", "IQR", "Kurtosis", "Skewness", "Mode(s)",};
 
     public ArrayList<String> values;
     private RecyclerView resultsRV;
@@ -37,7 +37,7 @@ public class DescriptiveOutputFragment extends Fragment {
         Bundle args = getArguments();
         double[] data = args.getDoubleArray("inputAsNumbers");
 
-        HashMap<String, Object> descriptiveFunction = Calculator.descriptiveStats(data);
+        LinkedHashMap<String, Object> descriptiveFunction = Calculator.descriptiveStats(data);
         values = new ArrayList<>();
         values.add(Integer.toString(((Double) descriptiveFunction.get("Count")).intValue()));
         DecimalFormat dfFormat = new DecimalFormat("#.####");
@@ -45,7 +45,7 @@ public class DescriptiveOutputFragment extends Fragment {
             values.add(dfFormat.format(descriptiveFunction.get(stat)));
         values.add((String) descriptiveFunction.get("Mode"));
 
-        resultsRV = (RecyclerView) layout.findViewById(R.id.recyclerView);
+        resultsRV = (RecyclerView) layout.findViewById(R.id.sampling_recycler_view);
         resultsRV.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new DescriptiveAdapter(getContext(), Arrays.asList(PROPERTIES), values);
         resultsRV.setAdapter(adapter);

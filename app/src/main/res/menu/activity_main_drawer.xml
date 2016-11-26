@@ -11,10 +11,6 @@
             android:icon="@drawable/ic_chart_bar"
             android:title="Distributions" />
         <item
-            android:id="@+id/regression"
-            android:icon="@drawable/ic_chart_line"
-            android:title="Regression" />
-        <item
             android:id="@+id/probability"
             android:icon="@drawable/ic_dice_5"
             android:title="Probability" />

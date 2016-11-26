@@ -1,9 +1,12 @@
 package com.mdb.statwiz.activities;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,6 +18,9 @@ import com.mdb.statwiz.R;
 import com.mdb.statwiz.fragments.DescriptiveInputFragment;
 import com.mdb.statwiz.fragments.FunctionViewFragment;
 import com.mdb.statwiz.fragments.MainContentFragment;
+import com.mdb.statwiz.fragments.ReferencesFragment;
+import com.mdb.statwiz.fragments.SamplingFragment;
+import com.mdb.statwiz.fragments.TablesFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -22,8 +28,9 @@ public class MainActivity extends AppCompatActivity
     public static final String FUNCTIONTYPE = "FUNCTION_TYPE";
     public static final String DISTRIBUTIONS = "distributions";
     public static final String PROBABILITY = "probability";
-    public int currentFragment = -1;
     private FragmentManager fragmentManager;
+
+    private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,7 @@ public class MainActivity extends AppCompatActivity
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
+        mHandler = new Handler();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -61,53 +69,74 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull final MenuItem item) {
         // Handle navigation view item clicks here.
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
+        final String functionTypeName = item.getTitle().toString();
+        Runnable mPendingRunnable = new Runnable() {
+            @Override
+            public void run() {
+                // update the main content by replacing fragments
+                Fragment targetFragment = getTargetFragment(item);
+                if (targetFragment == null)
+                    return;
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                        android.R.anim.fade_out);
+                fragmentTransaction.replace(R.id.fragment_container, getTargetFragment(item)).addToBackStack(functionTypeName);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+        };
+        mHandler.post(mPendingRunnable);
+
+        return true;
+    }
+
+    private Fragment getTargetFragment(MenuItem item) {
         int id = item.getItemId();
-        String functionTypeName = item.getTitle().toString();
         Fragment currentlyVisible = fragmentManager.findFragmentById(R.id.fragment_container);
+        Fragment targetFragment = null;
 
         switch (id) {
             case R.id.descriptive:
                 if (currentlyVisible instanceof DescriptiveInputFragment)
                     break;
-                DescriptiveInputFragment descriptiveInputFragment = new DescriptiveInputFragment();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, descriptiveInputFragment).addToBackStack("input").commit();
+                targetFragment = new DescriptiveInputFragment();
                 break;
             case R.id.distributions:
-                if (currentlyVisible instanceof FunctionViewFragment && currentlyVisible.getArguments().getString(FUNCTIONTYPE)==DISTRIBUTIONS)
+                if (currentlyVisible instanceof FunctionViewFragment && currentlyVisible.getArguments().getString(FUNCTIONTYPE) == DISTRIBUTIONS)
                     break;
-                FunctionViewFragment functionViewFragment1 = new FunctionViewFragment();
+                targetFragment = new FunctionViewFragment();
                 Bundle args1 = new Bundle();
                 args1.putString(FUNCTIONTYPE, DISTRIBUTIONS);
-                functionViewFragment1.setArguments(args1);
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, functionViewFragment1).addToBackStack(DISTRIBUTIONS).commit();
+                targetFragment.setArguments(args1);
                 break;
-            case R.id.regression:
-                break;
-
             case R.id.probability:
-                if (currentlyVisible instanceof FunctionViewFragment && currentlyVisible.getArguments().getString(FUNCTIONTYPE)==PROBABILITY)
+                if (currentlyVisible instanceof FunctionViewFragment && currentlyVisible.getArguments().getString(FUNCTIONTYPE) == PROBABILITY)
                     break;
-                FunctionViewFragment functionViewFragment2 = new FunctionViewFragment();
+                targetFragment = new FunctionViewFragment();
                 Bundle args2 = new Bundle();
                 args2.putString(FUNCTIONTYPE, PROBABILITY);
-                functionViewFragment2.setArguments(args2);
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, functionViewFragment2).addToBackStack(PROBABILITY).commit();
+                targetFragment.setArguments(args2);
                 break;
             case R.id.sampling:
+                if (currentlyVisible instanceof SamplingFragment)
+                    break;
+                targetFragment = new SamplingFragment();
                 break;
             case R.id.tables:
+                if (currentlyVisible instanceof TablesFragment)
+                    break;
+                targetFragment = new TablesFragment();
                 break;
             case R.id.reference:
+                if (currentlyVisible instanceof ReferencesFragment)
+                    break;
+                targetFragment = new ReferencesFragment();
                 break;
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return targetFragment;
     }
 }
