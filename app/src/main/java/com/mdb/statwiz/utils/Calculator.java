@@ -160,11 +160,11 @@ public class Calculator {
         return calculations;
     }
 
-    public static LinkedHashMap<String, Double> binomialCDF(int numberOfTrials, double probabilityOfSuccess, int x0, int x1) {
+    public static LinkedHashMap<String, Double> binomialCDF(int numberOfTrials, double probabilityOfSuccess, int x) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         BinomialDistribution biDist = new BinomialDistribution(numberOfTrials, probabilityOfSuccess);
 
-        calculations.put("BinomialCDF", biDist.cumulativeProbability(x0, x1));
+        calculations.put("BinomialCDF", biDist.cumulativeProbability(x));
         calculations.put("Mean", biDist.getNumericalMean());
 
         return calculations;
@@ -200,10 +200,10 @@ public class Calculator {
         return calculations;
     }
 
-    public static LinkedHashMap<String, Double> poissonCDF(double mean, int x0, int x1) {
+    public static LinkedHashMap<String, Double> poissonCDF(double mean, int x) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         PoissonDistribution poissonDist = new PoissonDistribution(mean);
-        calculations.put("PoissonCDF", poissonDist.cumulativeProbability(x0, x1));
+        calculations.put("PoissonCDF", poissonDist.cumulativeProbability(x));
 
         return calculations;
     }
