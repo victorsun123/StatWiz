@@ -43,7 +43,6 @@ public class SamplingDefinitionsAdapter extends RecyclerView.Adapter<SamplingDef
             add(new Tuple<>("Undercoverage", "A sampling scheme that biases the sample in a way that gives a part of the population less representation than it has in the population suffers from undercoverage."));
             add(new Tuple<>("Nonresponse bias", "Bias introduced when a large fraction of those sampled fails to respond. Those who do respond are likely to not represent the entire population. Voluntary response bias is a form of nonresponse bias, but nonresponse may occur for other reasons. For example, those who are at work during the day won’t respond to a telephone survey conducted only during working hours."));
             add(new Tuple<>("Response bias", "Anything in a survey design that influences responses falls under the heading of response bias. One typical response bias arises from the wording of questions, which may suggest a favored response. Voters, for example, are more likely to express support of “the president” than support of the particular person holding that office at the moment."));
-            add(new Tuple<>("Definitions Source", "Bock, David E., Paul F. Velleman, and Richard D. De Veaux. Stats: Modeling the World. 3rd ed. Boston: Addison-Wesley, 2010. Print."));
         }
     };
 

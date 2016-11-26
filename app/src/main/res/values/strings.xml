@@ -12,5 +12,4 @@
     <string name="title_activity_descriptive_input">DescriptiveInputActivity</string>
     <string name="descriptive_title">Descriptive Data Input</string>
     <string name="descriptive_instruction">Instructions: Fill in the blank with space-separated values of your data for descriptive calculation</string>
-    <string name="textbook_citation">Source: Bock, David E., Paul F. Velleman, and Richard D. De Veaux. Stats: Modeling the World. 3rd ed. Boston: Addison-Wesley, 2010. Print.</string>
 </resources>
