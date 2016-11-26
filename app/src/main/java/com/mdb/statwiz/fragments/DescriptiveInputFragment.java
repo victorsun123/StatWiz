@@ -48,9 +48,6 @@ public class DescriptiveInputFragment extends Fragment implements View.OnClickLi
         submitInput.setOnClickListener(this);
 
         return layout;
-        //TODO: onbackPressed save in shared preference
-        //TODO: samsung keyboard and thirdy party keybaord have no commas!?!?!?!
-
     }
 
     @Override

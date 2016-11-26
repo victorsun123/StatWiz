@@ -12,4 +12,56 @@
     <string name="title_activity_descriptive_input">DescriptiveInputActivity</string>
     <string name="descriptive_title">Descriptive Data Input</string>
     <string name="descriptive_instruction">Instructions: Fill in the blank with space-separated values of your data for descriptive calculation</string>
+
+    <string-array name="terms">
+        <item>Population</item>
+        <item>Sample</item>
+        <item>Sample survey</item>
+        <item>Bias</item>
+        <item>Randomization</item>
+        <item>Sample size</item>
+        <item>Census</item>
+        <item>Population parameter</item>
+        <item>Statistic, sample statistic</item>
+        <item>Representative</item>
+        <item>Simple random sample (SRS)</item>
+        <item>Sampling frame</item>
+        <item>Sampling variability</item>
+        <item>Stratified random sample</item>
+        <item>Cluster sample</item>
+        <item>Multistage sample</item>
+        <item>Systematic sample</item>
+        <item>Pilot</item>
+        <item>Voluntary response bias</item>
+        <item>Convenience sample</item>
+        <item>Undercoverage</item>
+        <item>Nonresponse bias</item>
+        <item>Response bias</item>
+    </string-array>
+
+    <string-array name="definitions">
+        <item>The entire group of individuals or instances about whom we hope to learn.</item>
+        <item>A (representative) subset of a population, examined in hope of learning about the population.</item>
+        <item>A study that asks questions of a sample drawn from some population in the hope of learning something about the entire population. Polls taken to assess voter preferences are common sample surveys.</item>
+        <item>Any systematic failure of a sampling method to represent its population is bias. Biased sampling methods tend to over- or underestimate parameters. It is almost impossible to recover from bias, so efforts to avoid it are well spent. Common errors include:\n\n1. relying on voluntary response.\n2. undercoverage of the population.\n3. nonresponse bias.\n4. response bias.</item>
+        <item>The best defense against bias is randomization, in which each individual is given a fair, random chance of selection.</item>
+        <item>The number of individuals in a sample. The sample size determines how well the sample represents the population, not the fraction of the population sampled.</item>
+        <item>A sample that consists of the entire population is called a census.</item>
+        <item>A numerically valued attribute of a model for a population. We rarely expect to know the true value of a population parameter, but we do hope to estimate it from sampled data. For example, the mean income of all employed people in the country is a population parameter.</item>
+        <item>Statistics are values calculated for sampled data. Those that correspond to, and thus estimate, a population parameter, are of particular interest. For example, the mean income of all employed people in a representative sample can provide a good estimate of the corresponding population parameter. The term “sample statistic” is sometimes used, usually to parallel the corresponding term “population parameter.”</item>
+        <item>A sample is said to be representative if the statistics comadded from it accurately reflect the corresponding population parameters.</item>
+        <item>A simple random sample of sample size is a sample in which each set of elements in the population has an equal chance of selection.</item>
+        <item>A list of individuals from whom the sample is drawn is called the sampling frame. Individuals who may be in the population of interest, but who are not in the sampling frame, cannot be included in any sample.</item>
+        <item>The natural tendency of randomly drawn samples to differ, one from another. Sometimes, unfortunately, called sampling error, sampling variability is no error at all, but just the natural result of random sampling.</item>
+        <item>A sampling design in which the population is divided into several subpopulations, or strata, and random samples are then drawn from each stratum. If the strata are homogeneous, but are different from each other, a stratified sample may yield more consistent results than an SRS.</item>
+        <item>A sampling design in which entire groups, or clusters, are chosen at random. Cluster sampling is usually selected as a matter of convenience, practicality, or cost. Each cluster should be representative of the population, so all the clusters should be heterogeneous and similar to each other.</item>
+        <item>Sampling schemes that combine several sampling methods are called multistage samples. For example, a national polling service may stratify the country by geographical regions, select a random sample of cities from each region, and then interview a cluster of residents in each city.</item>
+        <item>A sample drawn by selecting individuals systematically from a sampling frame. When there is no relationship between the order of the sampling frame and the variables of interest, a systematic sample can be representative.</item>
+        <item>A small trial run of a survey to check whether questions are clear. A pilot study can reduce errors due to ambiguous questions.</item>
+        <item>Bias introduced to a sample when individuals can choose on their own whether to participate in the sample. Samples based on voluntary response are always invalid and cannot be recovered, no matter how large the sample size.</item>
+        <item>A convenience sample consists of the individuals who are conveniently available. Convenience samples often fail to be representative because every individual in the population is not equally convenient to sample.</item>
+        <item>A sampling scheme that biases the sample in a way that gives a part of the population less representation than it has in the population suffers from undercoverage.</item>
+        <item>Bias introduced when a large fraction of those sampled fails to respond. Those who do respond are likely to not represent the entire population. Voluntary response bias is a form of nonresponse bias, but nonresponse may occur for other reasons. For example, those who are at work during the day won’t respond to a telephone survey conducted only during working hours.</item>
+        <item>Anything in a survey design that influences responses falls under the heading of response bias. One typical response bias arises from the wording of questions, which may suggest a favored response. Voters, for example, are more likely to express support of “the president” than support of the particular person holding that office at the moment.</item>
+    </string-array>
 </resources>
