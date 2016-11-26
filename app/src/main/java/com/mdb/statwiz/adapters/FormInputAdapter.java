@@ -42,7 +42,7 @@ public class FormInputAdapter extends RecyclerView.Adapter<FormInputAdapter.Form
     }
 
 
-     public class FormInputViewHolder extends RecyclerView.ViewHolder {
+    public class FormInputViewHolder extends RecyclerView.ViewHolder {
         public TextInputEditText inputField;
         public TextInputLayout inputLayout;
 

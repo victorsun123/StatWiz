@@ -8,10 +8,9 @@ import com.mdb.statwiz.fragments.FormOutputFragment;
 import com.mdb.statwiz.utils.Tuple;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.Map.Entry;
 
 /**
  * Created by Sayan Paul on 11/19/2016.
@@ -20,14 +19,12 @@ import java.util.TreeSet;
 public class FormOutputPagerAdapter extends FragmentStatePagerAdapter {
     public List<Tuple<String, Double>> outputs;
 
-    public FormOutputPagerAdapter(FragmentManager manager, HashMap<String, Double> outputs) {
+    public FormOutputPagerAdapter(FragmentManager manager, LinkedHashMap<String, Double> outputs) {
         super(manager);
         this.outputs = new ArrayList<>(outputs.size());
 
-        SortedSet<String> keys = new TreeSet<>(outputs.keySet());
-        for (String key : keys) {
-            this.outputs.add(new Tuple<>(key, outputs.get(key)));
-        }
+        for (Entry<String, Double> e : outputs.entrySet())
+            this.outputs.add(new Tuple<>(e.getKey(), e.getValue()));
     }
 
     @Override
