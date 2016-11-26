@@ -123,12 +123,12 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
                 testList.add("X-Value");
                 break;
             case "Binomial CDF":
+                testList.add("Number of Trials");
                 testList.add("Probability of Success");
                 testList.add("Lower Bound");
                 testList.add("Upper Bound");
                 break;
             case "Geometric CDF":
-                testList.add("Number of Trials");
                 testList.add("Probability of Success");
                 testList.add("Lower Bound");
                 testList.add("Upper Bound");
