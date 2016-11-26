@@ -27,6 +27,6 @@ public class SamplingFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         samplingRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        samplingRecyclerView.setAdapter(new SamplingDefinitionsAdapter());
+        samplingRecyclerView.setAdapter(new SamplingDefinitionsAdapter(getActivity()));
     }
 }

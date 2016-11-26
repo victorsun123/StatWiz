@@ -35,7 +35,7 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
     private FormOutputPagerAdapter outputPagerAdapter;
     private FloatingActionButton left, right, calculateOutput;
     private String functionName;
-    private List<String> testList;
+    private List<String> inputList;
     private LinkedHashMap<String, Double> testOutputs;
     private FormInputAdapter.FormInputViewHolder holder;
 
@@ -52,108 +52,108 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
         functionName = getArguments().getString(MainActivity.FUNCTIONTYPE);
 
         // Initialize RecyclerView
-        testList = new ArrayList<>();
+        inputList = new ArrayList<>();
 
         switch (functionName) {
             case "Normal PDF":
-                testList.add("Mean");
-                testList.add("Standard Deviation");
-                testList.add("X-Value");
+                inputList.add("Mean");
+                inputList.add("Standard Deviation");
+                inputList.add("X-Value");
                 break;
             case "Normal CDF":
-                testList.add("Mean");
-                testList.add("Standard Deviation");
-                testList.add("Lower Bound");
-                testList.add("Upper Bound");
+                inputList.add("Mean");
+                inputList.add("Standard Deviation");
+                inputList.add("Lower Bound");
+                inputList.add("Upper Bound");
                 break;
             case "Inverse Normal":
-                testList.add("Mean");
-                testList.add("Standard Deviation");
-                testList.add("Area");
+                inputList.add("Mean");
+                inputList.add("Standard Deviation");
+                inputList.add("Area");
                 break;
             case "t PDF":
-                testList.add("Degrees of Freedom");
-                testList.add("X-Value");
+                inputList.add("Degrees of Freedom");
+                inputList.add("X-Value");
                 break;
             case "t CDF":
-                testList.add("Degrees of Freedom");
-                testList.add("Lower Bound");
-                testList.add("Upper Bound");
+                inputList.add("Degrees of Freedom");
+                inputList.add("Lower Bound");
+                inputList.add("Upper Bound");
                 break;
             case "Inverse t":
-                testList.add("Degrees of Freedom");
-                testList.add("Area");
+                inputList.add("Degrees of Freedom");
+                inputList.add("Area");
                 break;
             case "Chi Squared PDF":
-                testList.add("Degrees of Freedom");
-                testList.add("X-Value");
+                inputList.add("Degrees of Freedom");
+                inputList.add("X-Value");
                 break;
             case "Chi Squared CDF":
-                testList.add("Degrees of Freedom");
-                testList.add("Lower Bound");
-                testList.add("Upper Bound");
+                inputList.add("Degrees of Freedom");
+                inputList.add("Lower Bound");
+                inputList.add("Upper Bound");
                 break;
             case "Inverse Chi Squared":
-                testList.add("Degrees of Freedom");
-                testList.add("Area");
+                inputList.add("Degrees of Freedom");
+                inputList.add("Area");
                 break;
             case "F PDF":
-                testList.add("Numerator Degrees of Freedom");
-                testList.add("Denominator Degrees of Freedom");
-                testList.add("X-Value");
+                inputList.add("Numerator Degrees of Freedom");
+                inputList.add("Denominator Degrees of Freedom");
+                inputList.add("X-Value");
                 break;
             case "F CDF":
-                testList.add("Numerator Degrees of Freedom");
-                testList.add("Denominator Degrees of Freedom");
-                testList.add("Lower Bound");
-                testList.add("Upper Bound");
+                inputList.add("Numerator Degrees of Freedom");
+                inputList.add("Denominator Degrees of Freedom");
+                inputList.add("Lower Bound");
+                inputList.add("Upper Bound");
                 break;
             case "Inverse F":
-                testList.add("Numerator Degrees of Freedom");
-                testList.add("Denominator Degrees of Freedom");
-                testList.add("Area");
+                inputList.add("Numerator Degrees of Freedom");
+                inputList.add("Denominator Degrees of Freedom");
+                inputList.add("Area");
                 break;
             case "Binomial PDF":
-                testList.add("Number of Trials");
-                testList.add("Probability of Success");
-                testList.add("X-Value");
+                inputList.add("Number of Trials");
+                inputList.add("Probability of Success");
+                inputList.add("X-Value");
                 break;
             case "Binomial CDF":
-                testList.add("Number of Trials");
-                testList.add("Probability of Success");
-                testList.add("Lower Bound");
-                testList.add("Upper Bound");
+                inputList.add("Number of Trials");
+                inputList.add("Probability of Success");
+                inputList.add("Lower Bound");
+                inputList.add("Upper Bound");
                 break;
             case "Geometric PDF":
-                testList.add("Probability of Success");
-                testList.add("X-Value");
+                inputList.add("Probability of Success");
+                inputList.add("X-Value");
                 break;
             case "Geometric CDF":
-                testList.add("Probability of Success");
-                testList.add("Lower Bound");
-                testList.add("Upper Bound");
+                inputList.add("Probability of Success");
+                inputList.add("Lower Bound");
+                inputList.add("Upper Bound");
                 break;
             case "Poisson PDF":
-                testList.add("Lambda");
-                testList.add("X-Value");
+                inputList.add("Lambda");
+                inputList.add("X-Value");
                 break;
             case "Poisson CDF":
-                testList.add("Lambda");
-                testList.add("Lower Bound");
-                testList.add("Upper Bound");
+                inputList.add("Lambda");
+                inputList.add("Lower Bound");
+                inputList.add("Upper Bound");
                 break;
             case "Permutations":
             case "Combinations":
-                testList.add("n");
-                testList.add("r");
+                inputList.add("n");
+                inputList.add("r");
                 break;
             case "Factorial":
-                testList.add("n");
+                inputList.add("n");
                 break;
 
         }
 
-        mAdapter = new FormInputAdapter(getActivity(), testList);
+        mAdapter = new FormInputAdapter(getActivity(), inputList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -179,304 +179,74 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
 
     public void calculateValues() {
         testOutputs = new LinkedHashMap<>();
-        switch (functionName) {
-            case "Normal PDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double mean = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double std = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    double x = Double.parseDouble(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> normalPDF = Calculator.normalDistribution(mean, std, x);
-                    testOutputs.put("Normal PDF", normalPDF.get("NormalPDF"));
-                    testOutputs.put("Normal CDF", normalPDF.get("NormalCDF"));
-                    testOutputs.put("Z-Score", normalPDF.get("ZScore"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Normal CDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double mean = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double std = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    double lowerBound = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(3);
-                    double upperBound = Double.parseDouble(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> normalCDF = Calculator.normalCDF(mean, std, lowerBound, upperBound);
-                    testOutputs.put("Normal CDF", normalCDF.get("NormalCDF"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Inverse Normal":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double mean = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double std = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    double area = Double.parseDouble(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> inverseNorm = Calculator.inverseNorm(mean, std, area);
-                    testOutputs.put("Inverse Normal", inverseNorm.get("InverseNormal"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "t PDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double dof = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double x = Double.parseDouble(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> tPDF = Calculator.tDistribution(dof, x);
-                    testOutputs.put("t PDF", tPDF.get("tPDF"));
-                    testOutputs.put("t CDF", tPDF.get("tCDF"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "t CDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double dof = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double lowerBound = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    double upperBound = Double.parseDouble(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> tCDF = Calculator.tCDF(dof, lowerBound, upperBound);
-                    testOutputs.put("t CDF", tCDF.get("tCDF"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Inverse t":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double dof = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double area = Double.parseDouble(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> inverseT = Calculator.inverseT(dof, area);
-                    testOutputs.put("Inverse t", inverseT.get("Inverset"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Chi Squared PDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double dof = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double x = Double.parseDouble(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> chiSquarePDF = Calculator.chiSquareDist(dof, x);
-                    testOutputs.put("Chi Squared PDF", chiSquarePDF.get("ChiSqPDF"));
-                    testOutputs.put("Chi Squared CDF", chiSquarePDF.get("ChiSqCDF"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Chi Squared CDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double dof = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double lowerBound = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    double upperBound = Double.parseDouble(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> chiSquareCDF = Calculator.chiSquareCDF(dof, lowerBound, upperBound);
-                    testOutputs.put("Chi Squared CDF", chiSquareCDF.get("ChiSqCDF"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Inverse Chi Squared":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double dof = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double area = Double.parseDouble(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> inverseChiSquare = Calculator.inverseChiSquare(dof, area);
-                    testOutputs.put("Inverse Chi Squared", inverseChiSquare.get("InverseChiSq"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "F PDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double ndof = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double ddof = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    double x = Double.parseDouble(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> FDistribution = Calculator.FDist(ndof, ddof, x);
-                    testOutputs.put("F PDF", FDistribution.get("FPDF"));
-                    testOutputs.put("F CDF", FDistribution.get("FCDF"));
-                    testOutputs.put("Mean", FDistribution.get("Mean"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "F CDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double ndof = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double ddof = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    double lowerBound = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(3);
-                    double upperBound = Double.parseDouble(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> FCDF = Calculator.FCDF(ndof, ddof, lowerBound, upperBound);
-                    testOutputs.put("F CDF", FCDF.get("FCDF"));
-                    testOutputs.put("Mean", FCDF.get("Mean"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Inverse F":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double ndof = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double ddof = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    double area = Double.parseDouble(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> inverseF = Calculator.inverseF(ndof, ddof, area);
-                    testOutputs.put("Inverse F", inverseF.get("InverseF"));
-                    testOutputs.put("Mean", inverseF.get("Mean"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Binomial PDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    int numTrials = Integer.parseInt(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double probability = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    int x = Integer.parseInt(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> binomialPDF = Calculator.binomialDist(numTrials, probability, x);
-                    testOutputs.put("Binomial PMF", binomialPDF.get("BinomialPDF"));
-                    testOutputs.put("Binomial CDF", binomialPDF.get("BinomialCDF"));
-                    testOutputs.put("Mean", binomialPDF.get("Mean"));
-
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Binomial CDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    int numTrials = Integer.parseInt(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    double probability = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    int lowerBound = Integer.parseInt(holder.inputField.getText().toString()) - 1;
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(3);
-                    int upperBound = Integer.parseInt(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> binomialCDF = Calculator.binomialCDF(numTrials, probability, lowerBound, upperBound);
-                    testOutputs.put("Binomial CDF", binomialCDF.get("BinomialCDF"));
-                    testOutputs.put("Mean", binomialCDF.get("Mean"));
-
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Geometric PDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double probability = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    int x = Integer.parseInt(holder.inputField.getText().toString()) - 1;
-                    LinkedHashMap<String, Double> geometricPDF = Calculator.geometricDist(probability, x);
-                    testOutputs.put("Geometric PMF", geometricPDF.get("GeometricPDF"));
-                    testOutputs.put("Geometric CDF", geometricPDF.get("GeometricCDF"));
-                    testOutputs.put("Mean", geometricPDF.get("Mean"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-
-            case "Geometric CDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double probability = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    int lowerBound = Integer.parseInt(holder.inputField.getText().toString())-2;
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    int upperBound = Integer.parseInt(holder.inputField.getText().toString())-1;
-                    LinkedHashMap<String, Double> geometricCDF = Calculator.geometricCDF(probability, lowerBound, upperBound);
-                    testOutputs.put("Geometric CDF", geometricCDF.get("GeometricCDF"));
-                    testOutputs.put("Mean", geometricCDF.get("Mean"));
-
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Poisson PDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double mean = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    int x = Integer.parseInt(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> poissonPDF = Calculator.poissonDist(mean, x);
-                    testOutputs.put("Poisson PMF", poissonPDF.get("PoissonPDF"));
-                    testOutputs.put("Poisson CDF", poissonPDF.get("PoissonCDF"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Poisson CDF":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    double mean = Double.parseDouble(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    int lowerBound = Integer.parseInt(holder.inputField.getText().toString())-1;
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    int upperBound = Integer.parseInt(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> poissonCDF = Calculator.poissonCDF(mean, lowerBound, upperBound);
-                    testOutputs.put("Poisson CDF", poissonCDF.get("PoissonCDF"));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Permutations":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    long n = Integer.parseInt(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    long r = Integer.parseInt(holder.inputField.getText().toString());
-                    testOutputs.put("Permutation", Calculator.permutation(n, r));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Combinations":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    long n = Integer.parseInt(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    long r = Integer.parseInt(holder.inputField.getText().toString());
-                    testOutputs.put("Combination", Calculator.combination(n, r));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case "Factorial":
-                try {
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
-                    long n = Integer.parseInt(holder.inputField.getText().toString());
-                    testOutputs.put("Factorial", Calculator.factorial(n));
-                } catch (Exception e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
-                }
-                break;
-
+        try {
+            switch (functionName) {
+                case "Normal PDF":
+                    normalPDF();
+                    break;
+                case "Normal CDF":
+                    normalCDF();
+                    break;
+                case "Inverse Normal":
+                    inverseNorm();
+                    break;
+                case "t PDF":
+                    tPDF();
+                    break;
+                case "t CDF":
+                    tCDF();
+                    break;
+                case "Inverse t":
+                    inverseT();
+                    break;
+                case "Chi Squared PDF":
+                    chiSquaredPDF();
+                    break;
+                case "Chi Squared CDF":
+                    chiSquaredCDF();
+                    break;
+                case "Inverse Chi Squared":
+                    inverseChiSquared();
+                    break;
+                case "F PDF":
+                    fPDF();
+                    break;
+                case "F CDF":
+                    fCDF();
+                    break;
+                case "Inverse F":
+                    inverseF();
+                    break;
+                case "Binomial PDF":
+                    binomialPDF();
+                    break;
+                case "Binomial CDF":
+                    binomialCDF();
+                    break;
+                case "Geometric PDF":
+                    geometricPDF();
+                    break;
+                case "Geometric CDF":
+                    geometricCDF();
+                    break;
+                case "Poisson PDF":
+                    poissonPDF();
+                    break;
+                case "Poisson CDF":
+                    poissonCDF();
+                    break;
+                case "Permutations":
+                    permutation();
+                    break;
+                case "Combinations":
+                    combination();
+                    break;
+                case "Factorial":
+                    factorial();
+                    break;
+            }
+        } catch (Exception e) {
+            Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -497,5 +267,238 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 break;
         }
+    }
+
+    public void normalPDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double mean = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double std = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+        double x = Double.parseDouble(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> normalPDF = Calculator.normalDistribution(mean, std, x);
+        testOutputs.put("Normal PDF", normalPDF.get("NormalPDF"));
+        testOutputs.put("Normal CDF", normalPDF.get("NormalCDF"));
+        testOutputs.put("Z-Score", normalPDF.get("ZScore"));
+    }
+
+    public void normalCDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double mean = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double std = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+        double lowerBound = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(3);
+        double upperBound = Double.parseDouble(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> normalCDF = Calculator.normalCDF(mean, std, lowerBound, upperBound);
+        testOutputs.put("Normal CDF", normalCDF.get("NormalCDF"));
+    }
+
+    public void inverseNorm() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double mean = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double std = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+        double area = Double.parseDouble(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> inverseNorm = Calculator.inverseNorm(mean, std, area);
+        testOutputs.put("Inverse Normal", inverseNorm.get("InverseNormal"));
+    }
+
+    public void tPDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double dof = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double x = Double.parseDouble(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> tPDF = Calculator.tDistribution(dof, x);
+        testOutputs.put("t PDF", tPDF.get("tPDF"));
+        testOutputs.put("t CDF", tPDF.get("tCDF"));
+    }
+
+    public void tCDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double dof = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double lowerBound = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+        double upperBound = Double.parseDouble(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> tCDF = Calculator.tCDF(dof, lowerBound, upperBound);
+        testOutputs.put("t CDF", tCDF.get("tCDF"));
+    }
+
+    public void inverseT() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double dof = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double area = Double.parseDouble(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> inverseT = Calculator.inverseT(dof, area);
+        testOutputs.put("Inverse t", inverseT.get("Inverset"));
+    }
+
+    public void chiSquaredPDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double dof = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double x = Double.parseDouble(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> chiSquarePDF = Calculator.chiSquareDist(dof, x);
+        testOutputs.put("Chi Squared PDF", chiSquarePDF.get("ChiSqPDF"));
+        testOutputs.put("Chi Squared CDF", chiSquarePDF.get("ChiSqCDF"));
+    }
+
+    public void chiSquaredCDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double dof = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double lowerBound = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+        double upperBound = Double.parseDouble(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> chiSquareCDF = Calculator.chiSquareCDF(dof, lowerBound, upperBound);
+        testOutputs.put("Chi Squared CDF", chiSquareCDF.get("ChiSqCDF"));
+    }
+
+    public void inverseChiSquared() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double dof = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double area = Double.parseDouble(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> inverseChiSquare = Calculator.inverseChiSquare(dof, area);
+        testOutputs.put("Inverse Chi Squared", inverseChiSquare.get("InverseChiSq"));
+    }
+
+    public void fPDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double ndof = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double ddof = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+        double x = Double.parseDouble(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> FDistribution = Calculator.FDist(ndof, ddof, x);
+        testOutputs.put("F PDF", FDistribution.get("FPDF"));
+        testOutputs.put("F CDF", FDistribution.get("FCDF"));
+        testOutputs.put("Mean", FDistribution.get("Mean"));
+    }
+
+    public void fCDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double ndof = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double ddof = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+        double lowerBound = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(3);
+        double upperBound = Double.parseDouble(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> FCDF = Calculator.FCDF(ndof, ddof, lowerBound, upperBound);
+        testOutputs.put("F CDF", FCDF.get("FCDF"));
+        testOutputs.put("Mean", FCDF.get("Mean"));
+    }
+
+    public void inverseF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double ndof = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double ddof = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+        double area = Double.parseDouble(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> inverseF = Calculator.inverseF(ndof, ddof, area);
+        testOutputs.put("Inverse F", inverseF.get("InverseF"));
+        testOutputs.put("Mean", inverseF.get("Mean"));
+    }
+
+    public void binomialPDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        int numTrials = Integer.parseInt(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double probability = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+        int x = Integer.parseInt(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> binomialPDF = Calculator.binomialDist(numTrials, probability, x);
+        testOutputs.put("Binomial PMF", binomialPDF.get("BinomialPDF"));
+        testOutputs.put("Binomial CDF", binomialPDF.get("BinomialCDF"));
+        testOutputs.put("Mean", binomialPDF.get("Mean"));
+
+    }
+
+    public void binomialCDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        int numTrials = Integer.parseInt(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        double probability = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+        int lowerBound = Integer.parseInt(holder.inputField.getText().toString()) - 1;
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(3);
+        int upperBound = Integer.parseInt(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> binomialCDF = Calculator.binomialCDF(numTrials, probability, lowerBound, upperBound);
+        testOutputs.put("Binomial CDF", binomialCDF.get("BinomialCDF"));
+        testOutputs.put("Mean", binomialCDF.get("Mean"));
+
+    }
+
+    public void geometricPDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double probability = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        int x = Integer.parseInt(holder.inputField.getText().toString()) - 1;
+        LinkedHashMap<String, Double> geometricPDF = Calculator.geometricDist(probability, x);
+        testOutputs.put("Geometric PMF", geometricPDF.get("GeometricPDF"));
+        testOutputs.put("Geometric CDF", geometricPDF.get("GeometricCDF"));
+        testOutputs.put("Mean", geometricPDF.get("Mean"));
+    }
+
+
+    public void geometricCDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double probability = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        int lowerBound = Integer.parseInt(holder.inputField.getText().toString()) - 2;
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+        int upperBound = Integer.parseInt(holder.inputField.getText().toString()) - 1;
+        LinkedHashMap<String, Double> geometricCDF = Calculator.geometricCDF(probability, lowerBound, upperBound);
+        testOutputs.put("Geometric CDF", geometricCDF.get("GeometricCDF"));
+        testOutputs.put("Mean", geometricCDF.get("Mean"));
+
+    }
+
+    public void poissonPDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double mean = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        int x = Integer.parseInt(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> poissonPDF = Calculator.poissonDist(mean, x);
+        testOutputs.put("Poisson PMF", poissonPDF.get("PoissonPDF"));
+        testOutputs.put("Poisson CDF", poissonPDF.get("PoissonCDF"));
+    }
+
+    public void poissonCDF() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        double mean = Double.parseDouble(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        int lowerBound = Integer.parseInt(holder.inputField.getText().toString()) - 1;
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+        int upperBound = Integer.parseInt(holder.inputField.getText().toString());
+        LinkedHashMap<String, Double> poissonCDF = Calculator.poissonCDF(mean, lowerBound, upperBound);
+        testOutputs.put("Poisson CDF", poissonCDF.get("PoissonCDF"));
+    }
+
+    public void permutation() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        long n = Integer.parseInt(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        long r = Integer.parseInt(holder.inputField.getText().toString());
+        testOutputs.put("Permutation", Calculator.permutation(n, r));
+    }
+
+    public void combination() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        long n = Integer.parseInt(holder.inputField.getText().toString());
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
+        long r = Integer.parseInt(holder.inputField.getText().toString());
+        testOutputs.put("Combination", Calculator.combination(n, r));
+    }
+
+    public void factorial() {
+        holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
+        long n = Integer.parseInt(holder.inputField.getText().toString());
+        testOutputs.put("Factorial", Calculator.factorial(n));
     }
 }

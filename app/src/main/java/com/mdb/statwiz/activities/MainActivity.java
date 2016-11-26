@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment currentlyVisible = fragmentManager.findFragmentById(R.id.fragment_container);
         Fragment targetFragment = null;
+        Bundle args = new Bundle();
 
         switch (id) {
             case R.id.descriptive:
@@ -109,17 +110,13 @@ public class MainActivity extends AppCompatActivity
                 if (currentlyVisible instanceof FunctionViewFragment && currentlyVisible.getArguments().getString(FUNCTIONTYPE) == DISTRIBUTIONS)
                     break;
                 targetFragment = new FunctionViewFragment();
-                Bundle args1 = new Bundle();
-                args1.putString(FUNCTIONTYPE, DISTRIBUTIONS);
-                targetFragment.setArguments(args1);
+                args.putString(FUNCTIONTYPE, DISTRIBUTIONS);
                 break;
             case R.id.probability:
                 if (currentlyVisible instanceof FunctionViewFragment && currentlyVisible.getArguments().getString(FUNCTIONTYPE) == PROBABILITY)
                     break;
                 targetFragment = new FunctionViewFragment();
-                Bundle args2 = new Bundle();
-                args2.putString(FUNCTIONTYPE, PROBABILITY);
-                targetFragment.setArguments(args2);
+                args.putString(FUNCTIONTYPE, PROBABILITY);
                 break;
             case R.id.sampling:
                 if (currentlyVisible instanceof SamplingFragment)
@@ -137,6 +134,7 @@ public class MainActivity extends AppCompatActivity
                 targetFragment = new ReferencesFragment();
                 break;
         }
+        targetFragment.setArguments(args);
         return targetFragment;
     }
 }
