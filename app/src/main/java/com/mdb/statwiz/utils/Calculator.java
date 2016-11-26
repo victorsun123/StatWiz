@@ -200,10 +200,10 @@ public class Calculator {
         return calculations;
     }
 
-    public static LinkedHashMap<String, Double> poissonCDF(double mean, int x0, int x1) {
+    public static LinkedHashMap<String, Double> poissonCDF(double mean, int x) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         PoissonDistribution poissonDist = new PoissonDistribution(mean);
-        calculations.put("PoissonCDF", poissonDist.cumulativeProbability(x0, x1));
+        calculations.put("PoissonCDF", poissonDist.cumulativeProbability(x));
 
         return calculations;
     }

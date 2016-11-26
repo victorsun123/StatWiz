@@ -138,8 +138,7 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
                 break;
             case "Poisson CDF":
                 testList.add("Lambda");
-                testList.add("Lower Bound");
-                testList.add("Upper Bound");
+                testList.add("X-Value");
                 break;
             case "Permutations":
             case "Combinations":
@@ -433,10 +432,8 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
                     holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
                     double mean = Double.parseDouble(holder.inputField.getText().toString());
                     holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    int lowerBound = Integer.parseInt(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    int upperBound = Integer.parseInt(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> poissonCDF = Calculator.poissonCDF(mean, lowerBound, upperBound);
+                    int x = Integer.parseInt(holder.inputField.getText().toString());
+                    LinkedHashMap<String, Double> poissonCDF = Calculator.poissonCDF(mean, x);
                     testOutputs.put("Poisson CDF", poissonCDF.get("PoissonCDF"));
                 } catch (Exception e) {
                     Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
