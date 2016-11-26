@@ -240,6 +240,7 @@ public class Calculator {
 
     public static double factorial(long n) {
         if (n == 0 || n == 1) return 1;
+        if(n<0) return 0;
         long result = 1;
         for (long i = 1; i <= n; i++) result *= i;
         return (double) result;
@@ -249,12 +250,12 @@ public class Calculator {
         if (r == 0) return 1;
         if (r == 1) return n;
         if (n == r) return factorial(n);
-        if (n < r) return 0;
+        if (n < r || n<0 || r<0) return 0;
         return (double) factorial(n) / factorial(n - r);
     }
 
     public static double combination(long n, long r) {
-        if (n < r) return 0;
+        if (n < r || n<0 || r<0) return 0;
         if (r == 0 || n == r) return 1;
         if (r == 1 || n == (r + 1)) return n;
         return (double) permutation(n, r) / factorial(r);

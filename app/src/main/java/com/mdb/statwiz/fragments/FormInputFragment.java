@@ -471,7 +471,7 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
                 try {
                     holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
                     long n = Integer.parseInt(holder.inputField.getText().toString());
-                    testOutputs.put("Permutation", Calculator.factorial(n));
+                    testOutputs.put("Factorial", Calculator.factorial(n));
                 } catch (Exception e) {
                     Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
                 }
