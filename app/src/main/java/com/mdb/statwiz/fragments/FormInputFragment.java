@@ -121,16 +121,17 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
             case "Binomial CDF":
                 testList.add("Number of Trials");
                 testList.add("Probability of Success");
-                testList.add("Number of successes");
-                break;
-            case "Geometric PDF":
-                testList.add("Probability of Success");
                 testList.add("Lower Bound");
                 testList.add("Upper Bound");
                 break;
-            case "Geometric CDF":
+            case "Geometric PDF":
                 testList.add("Probability of Success");
                 testList.add("X-Value");
+                break;
+            case "Geometric CDF":
+                testList.add("Probability of Success");
+                testList.add("Lower Bound");
+                testList.add("Upper Bound");
                 break;
             case "Poisson PDF":
                 testList.add("Lambda");
@@ -138,7 +139,8 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
                 break;
             case "Poisson CDF":
                 testList.add("Lambda");
-                testList.add("X-Value");
+                testList.add("Lower Bound");
+                testList.add("Upper Bound");
                 break;
             case "Permutations":
             case "Combinations":
@@ -374,8 +376,10 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
                     holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
                     double probability = Double.parseDouble(holder.inputField.getText().toString());
                     holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    int numSuccesses = Integer.parseInt(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> binomialCDF = Calculator.binomialCDF(numTrials, probability, numSuccesses);
+                    int lowerBound = Integer.parseInt(holder.inputField.getText().toString()) - 1;
+                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(3);
+                    int upperBound = Integer.parseInt(holder.inputField.getText().toString());
+                    LinkedHashMap<String, Double> binomialCDF = Calculator.binomialCDF(numTrials, probability, lowerBound, upperBound);
                     testOutputs.put("Binomial CDF", binomialCDF.get("BinomialCDF"));
                     testOutputs.put("Mean", binomialCDF.get("Mean"));
 
@@ -388,12 +392,11 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
                     holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
                     double probability = Double.parseDouble(holder.inputField.getText().toString());
                     holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    int lowerBound = Integer.parseInt(holder.inputField.getText().toString());
-                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
-                    int upperBound = Integer.parseInt(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> geometricCDF = Calculator.geometricCDF(probability, lowerBound, upperBound);
-                    testOutputs.put("Geometric CDF", geometricCDF.get("GeometricCDF"));
-                    testOutputs.put("Mean", geometricCDF.get("Mean"));
+                    int x = Integer.parseInt(holder.inputField.getText().toString()) - 1;
+                    LinkedHashMap<String, Double> geometricPDF = Calculator.geometricDist(probability, x);
+                    testOutputs.put("Geometric PMF", geometricPDF.get("GeometricPDF"));
+                    testOutputs.put("Geometric CDF", geometricPDF.get("GeometricCDF"));
+                    testOutputs.put("Mean", geometricPDF.get("Mean"));
                 } catch (Exception e) {
                     Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
                 }
@@ -404,11 +407,12 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
                     holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
                     double probability = Double.parseDouble(holder.inputField.getText().toString());
                     holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    int x = Integer.parseInt(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> geometricPDF = Calculator.geometricDist(probability, x);
-                    testOutputs.put("Geometric PMF", geometricPDF.get("GeometricPDF"));
-                    testOutputs.put("Geometric CDF", geometricPDF.get("GeometricCDF"));
-                    testOutputs.put("Mean", geometricPDF.get("Mean"));
+                    int lowerBound = Integer.parseInt(holder.inputField.getText().toString())-2;
+                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+                    int upperBound = Integer.parseInt(holder.inputField.getText().toString())-1;
+                    LinkedHashMap<String, Double> geometricCDF = Calculator.geometricCDF(probability, lowerBound, upperBound);
+                    testOutputs.put("Geometric CDF", geometricCDF.get("GeometricCDF"));
+                    testOutputs.put("Mean", geometricCDF.get("Mean"));
 
                 } catch (Exception e) {
                     Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
@@ -432,8 +436,10 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
                     holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);
                     double mean = Double.parseDouble(holder.inputField.getText().toString());
                     holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(1);
-                    int x = Integer.parseInt(holder.inputField.getText().toString());
-                    LinkedHashMap<String, Double> poissonCDF = Calculator.poissonCDF(mean, x);
+                    int lowerBound = Integer.parseInt(holder.inputField.getText().toString())-1;
+                    holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(2);
+                    int upperBound = Integer.parseInt(holder.inputField.getText().toString());
+                    LinkedHashMap<String, Double> poissonCDF = Calculator.poissonCDF(mean, lowerBound, upperBound);
                     testOutputs.put("Poisson CDF", poissonCDF.get("PoissonCDF"));
                 } catch (Exception e) {
                     Toast.makeText(getActivity().getApplicationContext(), "Improper values!", Toast.LENGTH_LONG).show();
