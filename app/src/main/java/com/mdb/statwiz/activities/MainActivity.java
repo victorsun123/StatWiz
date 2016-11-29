@@ -134,7 +134,8 @@ public class MainActivity extends AppCompatActivity
                 targetFragment = new ReferencesFragment();
                 break;
         }
-        targetFragment.setArguments(args);
+        if (targetFragment != null)
+            targetFragment.setArguments(args);
         return targetFragment;
     }
 }
