@@ -28,7 +28,7 @@ import java.util.List;
  * Created by Sayan Paul on 11/17/2016.
  */
 
-public class FormInputFragment extends Fragment implements View.OnClickListener {
+public class FormInputFragment extends Fragment implements View.OnClickListener, ViewPager.OnPageChangeListener {
     private RecyclerView mRecyclerView;
     private FormInputAdapter mAdapter;
     private ViewPager outputPager;
@@ -162,11 +162,13 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
         testOutputs.put("output", 0.0);
         outputPagerAdapter = new FormOutputPagerAdapter(getActivity().getSupportFragmentManager(), testOutputs);
         outputPager.setAdapter(outputPagerAdapter);
+        outputPager.addOnPageChangeListener(this);
 
         // Initializes left/right buttons for ViewPager
         left.setOnClickListener(this);
         right.setOnClickListener(this);
         calculateOutput.setOnClickListener(this);
+        setLeftRightButtonVisibility();
         return layout;
     }
 
@@ -265,8 +267,33 @@ public class FormInputFragment extends Fragment implements View.OnClickListener 
                 updateAdapter();
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                setLeftRightButtonVisibility();
                 break;
         }
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        setLeftRightButtonVisibility();
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+    }
+
+    private void setLeftRightButtonVisibility() {
+        if (outputPager.getCurrentItem() == 0)
+            left.setVisibility(View.GONE);
+        else
+            left.setVisibility(View.VISIBLE);
+        if (outputPager.getCurrentItem() == outputPagerAdapter.getCount() - 1)
+            right.setVisibility(View.GONE);
+        else
+            right.setVisibility(View.VISIBLE);
     }
 
     public void normalPDF() {

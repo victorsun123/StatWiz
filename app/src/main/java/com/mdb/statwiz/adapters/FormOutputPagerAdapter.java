@@ -35,7 +35,7 @@ public class FormOutputPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Tuple<String, Double> output = outputs.get(position);
-        return FormOutputFragment.newInstance(output.key, output.value);
+        return FormOutputFragment.newInstance(output.key, output.value, position, getCount());
     }
 
     @Override
