@@ -22,6 +22,9 @@ import com.mdb.statwiz.fragments.ReferencesFragment;
 import com.mdb.statwiz.fragments.SamplingFragment;
 import com.mdb.statwiz.fragments.TablesFragment;
 
+/**
+ * App uses one activity and multiple fragment pages to optimize navigation UX and for more intuitive structure for implementing function abstractions
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() {       //implement back button interface for fragment and drawer navigation
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         int count = getFragmentManager().getBackStackEntryCount();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -94,6 +97,11 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * Implement drawer navigation to show fragment based on element selected in drawer
+     * @param item
+     * @return current fragment
+     */
     private Fragment getTargetFragment(MenuItem item) {
         int id = item.getItemId();
         Fragment currentlyVisible = fragmentManager.findFragmentById(R.id.fragment_container);
@@ -102,7 +110,7 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.descriptive:
-                if (currentlyVisible instanceof DescriptiveInputFragment)
+                if (currentlyVisible instanceof DescriptiveInputFragment)   //no need to return fragment if already on current fragment
                     break;
                 targetFragment = new DescriptiveInputFragment();
                 break;

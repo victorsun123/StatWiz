@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by victorsun on 11/13/16.
+ * Adapter Class for the Recycler View displaying descriptive data
  */
 
 public class DescriptiveAdapter extends RecyclerView.Adapter<DescriptiveAdapter.CustomViewHolder> {
@@ -22,6 +22,11 @@ public class DescriptiveAdapter extends RecyclerView.Adapter<DescriptiveAdapter.
     private List<String> properties;
     private List<String> values;
 
+    /**
+     * @param context
+     * @param properties property type i.e. mean, median, standard deviation, etc.
+     * @param values value of property
+     */
     public DescriptiveAdapter(Context context, List<String> properties, ArrayList<String> values) {
         this.context = context;
         this.properties = properties;

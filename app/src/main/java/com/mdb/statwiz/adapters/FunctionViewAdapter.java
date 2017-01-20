@@ -20,7 +20,7 @@ import com.mdb.statwiz.utils.Function;
 import java.util.List;
 
 /**
- * Created by Sayan Paul on 11/12/2016.
+ * Adapter for recycler view of functions within each function group, i.e. distributions or probability
  */
 
 public class FunctionViewAdapter extends RecyclerView.Adapter<FunctionViewAdapter.FunctionViewHolder> {

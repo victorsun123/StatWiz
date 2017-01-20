@@ -19,6 +19,11 @@ import com.mdb.statwiz.R;
 
 import java.util.ArrayList;
 
+
+/**
+ * This fragment implements list input interface for descriptive stats
+ *
+ */
 public class DescriptiveInputFragment extends Fragment implements View.OnClickListener {
     public static final String LIST_KEY = "listKey";
     public EditText descriptiveInput;
@@ -32,7 +37,7 @@ public class DescriptiveInputFragment extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.descriptive_input, container, false);
 
-        preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        preferences = PreferenceManager.getDefaultSharedPreferences(getContext());      //get data from shared preference to restore input values from inputs when fragment was last used
         inputString = preferences.getString(LIST_KEY, "");
 
         descriptiveInput = (EditText) layout.findViewById(R.id.editText);
@@ -54,26 +59,26 @@ public class DescriptiveInputFragment extends Fragment implements View.OnClickLi
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.space:
+            case R.id.space:        //space button to deal with compatability issues for certain numpads that do not have spaces
                 descriptiveInput.setText(descriptiveInput.getText().toString() + " ");
                 Selection.setSelection(descriptiveInput.getText(), descriptiveInput.length());
                 break;
-            case R.id.clear_field:
+            case R.id.clear_field:      //button to clear field
                 descriptiveInput.setText("");
                 break;
-            case R.id.submit_input:
+            case R.id.submit_input:     //saves input in shared preference when submitted for computation
                 inputString = descriptiveInput.getText().toString();
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString(LIST_KEY, inputString);
                 editor.apply();
 
-                splitInputString = inputString.split("\\s+");
+                splitInputString = inputString.split("\\s+");       //distinguish space seperated values in string list and convert into array
 
                 inputAsNumbers = new ArrayList<Double>();
                 try {
                     for (String input : splitInputString)
                         inputAsNumbers.add(Double.parseDouble(input));
-                } catch (Exception e) {
+                } catch (Exception e) {                                 //list is not formatted properly
                     Toast.makeText(getActivity().getApplicationContext(),
                             "Incorrect number format!", Toast.LENGTH_LONG).show();
                     break;
@@ -97,7 +102,7 @@ public class DescriptiveInputFragment extends Fragment implements View.OnClickLi
     }
 
     @Override
-    public void onDestroyView() {
+    public void onDestroyView() {           //when changing fragments store input values on shared preference to be saved when fragment is entered agian
         inputString = descriptiveInput.getText().toString();
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(LIST_KEY, inputString);

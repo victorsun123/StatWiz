@@ -12,8 +12,8 @@ import com.mdb.statwiz.R;
 
 import java.util.List;
 
-/**
- * Created by Sayan Paul on 11/17/2016.
+/*
+ * Adapter for recycler view for input form for distributions
  */
 
 public class FormInputAdapter extends RecyclerView.Adapter<FormInputAdapter.FormInputViewHolder> {

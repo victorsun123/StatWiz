@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import com.mdb.statwiz.R;
 import com.mdb.statwiz.adapters.SamplingDefinitionsAdapter;
 
+/**
+ * This fragment displays sampling terms and definitions, displayed through recycler view.
+ */
 public class SamplingFragment extends Fragment {
     private RecyclerView samplingRecyclerView;
 

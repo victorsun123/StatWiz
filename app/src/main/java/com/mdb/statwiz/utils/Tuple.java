@@ -1,7 +1,7 @@
 package com.mdb.statwiz.utils;
 
 /**
- * Created by Sayan Paul on 11/25/2016.
+ * Tuple Class for storing results
  */
 
 public class Tuple<K, V> {

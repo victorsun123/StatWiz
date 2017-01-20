@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.mdb.statwiz.R;
 
 /**
- * Created by Sayan Paul on 11/12/2016.
+ * This is the fragment for the home screen
  */
 
 public class MainContentFragment extends Fragment {

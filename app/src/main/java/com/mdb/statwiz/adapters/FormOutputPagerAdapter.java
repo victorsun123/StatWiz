@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 /**
- * Created by Sayan Paul on 11/19/2016.
+ * Adapter for Recycler view for ViewPager outputting calculation results
  */
 
 public class FormOutputPagerAdapter extends FragmentStatePagerAdapter {

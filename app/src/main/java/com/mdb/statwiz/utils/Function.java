@@ -1,7 +1,7 @@
 package com.mdb.statwiz.utils;
 
 /**
- * Created by Sayan Paul on 11/12/2016.
+ * Functions class abstraction to store name and color of each function implemented
  */
 
 public class Function {

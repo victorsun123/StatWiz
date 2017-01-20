@@ -11,6 +11,10 @@ import android.webkit.WebView;
 
 import com.mdb.statwiz.R;
 
+
+/**
+ * This fragment displays reference equations through a javascript web view
+ */
 public class ReferencesFragment extends Fragment {
     private WebView referencesWebView;
 

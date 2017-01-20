@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.mdb.statwiz.R;
 
 /**
- * Created by Sayan Paul on 11/25/2016.
+ * Adapter for Recycler view containing definitions of each sampling term in reference section
  */
 
 public class SamplingDefinitionsAdapter extends RecyclerView.Adapter<SamplingDefinitionsAdapter.DefinitionViewHolder> {

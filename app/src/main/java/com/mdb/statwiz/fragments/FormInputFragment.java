@@ -25,19 +25,20 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
- * Created by Sayan Paul on 11/17/2016.
+ * This fragment displays all the computation interfaces input interfaces for distribution and probability, links it with the output
+ * view pager, and keeps track of function currently comptued so that all the function input pages can be abstracted under one fragment
  */
 
 public class FormInputFragment extends Fragment implements View.OnClickListener, ViewPager.OnPageChangeListener {
     private RecyclerView mRecyclerView;
     private FormInputAdapter mAdapter;
-    private ViewPager outputPager;
+    private ViewPager outputPager;      //view pager displaying results
     private FormOutputPagerAdapter outputPagerAdapter;
     private FloatingActionButton left, right, calculateOutput;
-    private String functionName;
-    private List<String> inputList;
-    private LinkedHashMap<String, Double> testOutputs;
-    private FormInputAdapter.FormInputViewHolder holder;
+    private String functionName;    //function currently selected
+    private List<String> inputList;     //list of parameter names
+    private LinkedHashMap<String, Double> testOutputs;          //hashmap for storing outputs to be displayed
+    private FormInputAdapter.FormInputViewHolder holder;        //view holder for each input parameter
 
     @Nullable
     @Override
@@ -54,6 +55,7 @@ public class FormInputFragment extends Fragment implements View.OnClickListener,
         // Initialize RecyclerView
         inputList = new ArrayList<>();
 
+        //switch statement determining which input parameters to include in input form
         switch (functionName) {
             case "Normal PDF":
                 inputList.add("Mean");
@@ -172,13 +174,17 @@ public class FormInputFragment extends Fragment implements View.OnClickListener,
         return layout;
     }
 
+    //Updates adapter with new output values in testOutputs
     public void updateAdapter() {
-        if (testOutputs.size() != 0) {
+        if (testOutputs.size() != 0) {      //if calculation does not go through, don't display anything
             outputPagerAdapter = new FormOutputPagerAdapter(getActivity().getSupportFragmentManager(), testOutputs);
             outputPager.setAdapter(outputPagerAdapter);
         }
     }
 
+    /**
+     * switch statement based on function name to determine which calculations to be made
+     */
     public void calculateValues() {
         testOutputs = new LinkedHashMap<>();
         try {
@@ -252,6 +258,7 @@ public class FormInputFragment extends Fragment implements View.OnClickListener,
         }
     }
 
+    //Implement interface for results view pager
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -295,6 +302,10 @@ public class FormInputFragment extends Fragment implements View.OnClickListener,
         else
             right.setVisibility(View.VISIBLE);
     }
+
+    /**
+    * Methods for each function that retrieves input parameters, computes from calculator function and sends output to view pager
+    */
 
     public void normalPDF() {
         holder = (FormInputAdapter.FormInputViewHolder) mRecyclerView.findViewHolderForAdapterPosition(0);

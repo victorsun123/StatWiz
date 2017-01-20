@@ -9,12 +9,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Sayan Paul on 11/20/2016.
+ * Abstraction for assigning each function to a category of functions
  */
 
 public class FunctionsList {
     public static ColorGenerator generator = ColorGenerator.MATERIAL;
-    public static int[] COLORS = {
+    public static int[] COLORS = {          //Material Design Color Scheme
             Color.parseColor("#f44336"),    //red
             Color.parseColor("#9C27B0"),    //purple
             Color.parseColor("#3F51B5"),    //indigo
@@ -35,7 +35,7 @@ public class FunctionsList {
             Color.parseColor("#FF5722"),    //deep orange
             Color.parseColor("#9E9E9E"),    //gray
     };
-    public static final Function[] DISTRIBUTIONS = {
+    public static final Function[] DISTRIBUTIONS = {        //list of distribution functions
             new Function("Normal PDF", COLORS[0]),
             new Function("Normal CDF", COLORS[0]),
             new Function("Inverse Normal", COLORS[0]),
@@ -56,7 +56,7 @@ public class FunctionsList {
             new Function("Poisson CDF", COLORS[6]),
     };
 
-    public static final Function[] PROBABILITY = {
+    public static final Function[] PROBABILITY = {          //list of probability functions
             new Function("Permutations", COLORS[7]),
             new Function("Combinations", COLORS[8]),
             new Function("Factorial", COLORS[9]),

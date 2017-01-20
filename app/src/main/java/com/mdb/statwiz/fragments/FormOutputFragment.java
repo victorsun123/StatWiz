@@ -13,7 +13,7 @@ import com.mdb.statwiz.R;
 import java.util.Locale;
 
 /**
- * Created by Sayan Paul on 11/19/2016.
+ * This fragment formats the view pager used to display outputs for distribution and probability calculations
  */
 
 public class FormOutputFragment extends Fragment {

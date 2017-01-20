@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.mdb.statwiz.R;
 
+/**
+ *  This fragment displays table with z-score,t-score, and chi-square values by loading a PDF
+ */
 public class TablesFragment extends Fragment {
     private PDFView pdfView;
 

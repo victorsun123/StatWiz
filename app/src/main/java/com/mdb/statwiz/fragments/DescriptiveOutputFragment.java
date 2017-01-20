@@ -19,12 +19,13 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 /**
- * Created by victorsun on 11/13/16.
+ * This fragment gathers input data, sends to calculator class to compute, and outputs results
  */
 
 public class DescriptiveOutputFragment extends Fragment {
-
+    //properties to be called from calculator hashmap
     private static final String[] DOUBLE_STATS = {"Median", "Mean", "Standard Deviation", "Standard Error", "Variance", "Min", "Max", "Range", "Q1", "Q3", "IQR", "Kurtosis", "Skewness"};
+    //properties to be displayed on outputpage
     private static final String[] PROPERTIES = {"Count", "Median", "Mean", "Standard Deviation", "Standard Error", "Variance", "Min", "Max", "Range", "Q1", "Q3", "IQR", "Kurtosis", "Skewness", "Mode(s)",};
 
     public ArrayList<String> values;
@@ -37,11 +38,11 @@ public class DescriptiveOutputFragment extends Fragment {
         Bundle args = getArguments();
         double[] data = args.getDoubleArray("inputAsNumbers");
 
-        LinkedHashMap<String, Object> descriptiveFunction = Calculator.descriptiveStats(data);
-        values = new ArrayList<>();
-        values.add(Integer.toString(((Double) descriptiveFunction.get("Count")).intValue()));
+        LinkedHashMap<String, Object> descriptiveFunction = Calculator.descriptiveStats(data);      //send inputs to calculator function to implement Apache calculations
+        values = new ArrayList<>();                                                                 //arraylist containing output values
+        values.add(Integer.toString(((Double) descriptiveFunction.get("Count")).intValue()));       //count and mode calculations are retrieved separately due to different output formatting
         DecimalFormat dfFormat = new DecimalFormat("#.####");
-        for (String stat : DOUBLE_STATS)
+        for (String stat : DOUBLE_STATS)                                                            //retrieve values for all other properties
             values.add(dfFormat.format(descriptiveFunction.get(stat)));
         values.add((String) descriptiveFunction.get("Mode"));
 

@@ -14,14 +14,18 @@ import java.util.LinkedHashMap;
 
 
 /**
- * Created by emaanhariri on 11/16/16.
+ * Utility class performing statistical calculations
  */
 
 public class Calculator {
-
+    /**
+     * Method calculates all descriptive values given input list and enters into hashmap
+     * @param values list inputted by user to be calculated
+     * @return hash map containing all the descriptive values
+     */
     public static LinkedHashMap<String, Object> descriptiveStats(double[] values) {
         LinkedHashMap<String, Object> calculations = new LinkedHashMap<String, Object>();
-        DescriptiveStatistics descStats = new DescriptiveStatistics(values);
+        DescriptiveStatistics descStats = new DescriptiveStatistics(values); //descriptive stats object from Apache library used to calculate values given input
         calculations.put("Mean", descStats.getMean());
         calculations.put("Max", descStats.getMax());
         calculations.put("Min", descStats.getMin());
@@ -36,7 +40,7 @@ public class Calculator {
         calculations.put("Variance", descStats.getVariance());
         calculations.put("Kurtosis", descStats.getKurtosis());
         calculations.put("Skewness", descStats.getSkewness());
-        LinkedHashMap<Double, Integer> freqs = new LinkedHashMap<Double, Integer>();
+        LinkedHashMap<Double, Integer> freqs = new LinkedHashMap<Double, Integer>();    //hashmap for keeping track of number frequency to compute mode
         for (Double value : values) {
             if (freqs.containsKey(value)) {
                 freqs.put(value, (freqs.get(value) + 1));
@@ -56,7 +60,7 @@ public class Calculator {
                     modesArrayList.add(value);
             }
         }
-        Object[] modes = modesArrayList.toArray();
+        Object[] modes = modesArrayList.toArray();      //convert list of modes into string format and enter into hashmap
         String modesAsString = "";
         for (Object o : modes) {
             modesAsString += o.toString() + ", ";
@@ -66,7 +70,13 @@ public class Calculator {
         return calculations;
     }
 
-
+    /**
+     * Method computes PDF normal distribution (CDF calulation for PDF functions assume lower bound of negative infinity)
+     * @param mean
+     * @param sd standard deviation
+     * @param x X-value
+     * @return hashmap containing PDF, CDF, and Z-score values
+     */
     public static LinkedHashMap<String, Double> normalDistribution(double mean, double sd, double x) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         NormalDistribution normDist = new NormalDistribution(mean, sd);
@@ -78,6 +88,15 @@ public class Calculator {
         return calculations;
     }
 
+    /**
+     * Method computes CDF normal distribution
+     * @param mean
+     * @param sd standard deviation
+     * @param x0 lower bound
+     * @param x1 upperbound
+     * @return hashmap containing CDF value
+     */
+
     public static LinkedHashMap<String, Double> normalCDF(double mean, double sd, double x0, double x1) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         NormalDistribution normDist = new NormalDistribution(mean, sd);
@@ -87,6 +106,13 @@ public class Calculator {
 
     }
 
+    /**
+     * Method computes inverseNorm
+     * @param mean
+     * @param sd standard deviation
+     * @param p probability
+     * @return hashmap containing Inverse Norm value
+     */
     public static LinkedHashMap<String, Double> inverseNorm(double mean, double sd, double p) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         NormalDistribution normDist = new NormalDistribution(mean, sd);
@@ -95,6 +121,12 @@ public class Calculator {
         return calculations;
     }
 
+    /**
+     * Method computes PDF t distribution (CDF calulation for PDF functions assume lower bound of negative infinity)
+     * @param degreesOfFreedom
+     * @param x X-value
+     * @return hashmap containing PDF and CDF values
+     */
     public static LinkedHashMap<String, Double> tDistribution(double degreesOfFreedom, double x) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         TDistribution tDist = new TDistribution(degreesOfFreedom);
@@ -105,6 +137,13 @@ public class Calculator {
         return calculations;
     }
 
+    /**
+     * Method computes CDF t distribution
+     * @param degreesOfFreedom
+     * @param x0 lower bound
+     * @param x1 lower bound
+     * @return hashmap containing CDF value
+     */
     public static LinkedHashMap<String, Double> tCDF(double degreesOfFreedom, double x0, double x1) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         TDistribution tDist = new TDistribution(degreesOfFreedom);
@@ -113,7 +152,12 @@ public class Calculator {
         return calculations;
     }
 
-
+    /**
+     * Method computes inverse t distribution
+     * @param degreesOfFreedom
+     * @param p probability
+     * @return hashmap containing Inverse t value
+     */
     public static LinkedHashMap<String, Double> inverseT(double degreesOfFreedom, double p) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         TDistribution tDist = new TDistribution(degreesOfFreedom);
@@ -122,7 +166,12 @@ public class Calculator {
         return calculations;
     }
 
-
+    /**
+     * Method computes PDF Chi Squared distribution (CDF calulation for PDF functions assume lower bound of negative infinity)
+     * @param degreesOfFreedom
+     * @param x X-Value
+     * @return hashmap containing PDF and CDF values
+     */
     public static LinkedHashMap<String, Double> chiSquareDist(double degreesOfFreedom, double x) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         ChiSquaredDistribution chiDist = new ChiSquaredDistribution(degreesOfFreedom);
@@ -132,6 +181,13 @@ public class Calculator {
         return calculations;
     }
 
+    /**
+     * Method computes CDF Chi Squared distribution
+     * @param degreesOfFreedom
+     * @param x0 lower bound
+     * @param x1 upper bound
+     * @return hashmap containing CDF value
+     */
     public static LinkedHashMap<String, Double> chiSquareCDF(double degreesOfFreedom, double x0, double x1) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         ChiSquaredDistribution chiDist = new ChiSquaredDistribution(degreesOfFreedom);
@@ -140,6 +196,12 @@ public class Calculator {
         return calculations;
     }
 
+    /**
+     * Method computes inverse Chi Squared distribution
+     * @param degreesOfFreedom
+     * @param p probability
+     * @return hashmap containing inverse Chi Squared value
+     */
     public static LinkedHashMap<String, Double> inverseChiSquare(double degreesOfFreedom, double p) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         ChiSquaredDistribution chiDist = new ChiSquaredDistribution(degreesOfFreedom);
@@ -148,6 +210,13 @@ public class Calculator {
         return calculations;
     }
 
+    /**
+     * Method computes PMF Binomial distribution (CDF calulation for PMF functions assume lower bound of zero)
+     * @param numberOfTrials
+     * @param probabilityOfSuccess
+     * @param x X-value
+     * @return hashmap containing PMF, CDF, and Mean values
+     */
     public static LinkedHashMap<String, Double> binomialDist(int numberOfTrials, double probabilityOfSuccess, int x) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         BinomialDistribution biDist = new BinomialDistribution(numberOfTrials, probabilityOfSuccess);
@@ -159,7 +228,14 @@ public class Calculator {
 
         return calculations;
     }
-
+    /**
+     * Method computes CDF Binomial distribution
+     * @param numberOfTrials
+     * @param probabilityOfSuccess
+     * @param x0 lower bound
+     * @param x1 upper bound
+     * @return hashmap containing CDF and Mean values
+     */
     public static LinkedHashMap<String, Double> binomialCDF(int numberOfTrials, double probabilityOfSuccess, int x0, int x1) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         BinomialDistribution biDist = new BinomialDistribution(numberOfTrials, probabilityOfSuccess);
@@ -170,7 +246,12 @@ public class Calculator {
         return calculations;
     }
 
-
+    /**
+     * Method computes PMF Geometric distribution (CDF calulation for PMF functions assume lower bound of zero)
+     * @param probabilityOfSuccess
+     * @param x X-value
+     * @return hashmap containing PMF, CDF, and Mean values
+     */
     public static LinkedHashMap<String, Double> geometricDist(double probabilityOfSuccess, int x) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         GeometricDistribution geoDist = new GeometricDistribution(probabilityOfSuccess);
@@ -181,6 +262,13 @@ public class Calculator {
         return calculations;
     }
 
+    /**
+     * Method computes CDF Geometric distribution
+     * @param probabilityOfSuccess
+     * @param x0 lower bound
+     * @param x1 upper bound
+     * @return hashmap containing CDF and Mean values
+     */
     public static LinkedHashMap<String, Double> geometricCDF(double probabilityOfSuccess, int x0, int x1) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         GeometricDistribution geoDist = new GeometricDistribution(probabilityOfSuccess);
@@ -190,7 +278,12 @@ public class Calculator {
         return calculations;
     }
 
-
+    /**
+     * Method computes PMF Poisson distribution (CDF calulation for PMF functions assume lower bound of zero)
+     * @param mean
+     * @param x X-value
+     * @return hashmap containing PMF and CDF values
+     */
     public static LinkedHashMap<String, Double> poissonDist(double mean, int x) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         PoissonDistribution poissonDist = new PoissonDistribution(mean);
@@ -200,6 +293,14 @@ public class Calculator {
         return calculations;
     }
 
+    /**
+     * Method computes CDF Poisson distribution (CDF calulation for PMF functions assume lower bound of zero)
+     * @param mean
+     * @param lowerBound
+     * @param upperBound
+     * @return hashmap containing CDF value
+     */
+
     public static LinkedHashMap<String, Double> poissonCDF(double mean, int lowerBound, int upperBound) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         PoissonDistribution poissonDist = new PoissonDistribution(mean);
@@ -208,7 +309,13 @@ public class Calculator {
         return calculations;
     }
 
-
+    /**
+     *  Method computes PDF Fdistribution (CDF calulation for PDF functions assume lower bound of negative infinity)
+     * @param numeratordf numerator degrees of freedom
+     * @param denominatordf denominator degrees of freedom
+     * @param x x-value
+     * @return hashmap containing PDF, CDF, and Mean values
+     */
     public static LinkedHashMap<String, Double> FDist(double numeratordf, double denominatordf, double x) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         FDistribution FDist = new FDistribution(numeratordf, denominatordf);
@@ -219,6 +326,14 @@ public class Calculator {
         return calculations;
     }
 
+    /**
+     *  Method computes CDF F distribution
+     * @param numeratordf numerator degrees of freedom
+     * @param denominatordf denominator degrees of freedom
+     * @param x0 lower bound
+     * @param x1 upper bound
+     * @return hashmap containing CDF and Mean values
+     */
     public static LinkedHashMap<String, Double> FCDF(double numeratordf, double denominatordf, double x0, double x1) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         FDistribution FDist = new FDistribution(numeratordf, denominatordf);
@@ -228,6 +343,13 @@ public class Calculator {
         return calculations;
     }
 
+    /**
+     *  Method computes inverse F distribution
+     * @param numeratordf numerator degrees of freedom
+     * @param denominatordf denominator degrees of freedom
+     * @param p probability
+     * @return hashmap containing inverse F and Mean values
+     */
     public static LinkedHashMap<String, Double> inverseF(double numeratordf, double denominatordf, double p) {
         LinkedHashMap<String, Double> calculations = new LinkedHashMap<String, Double>();
         FDistribution FDist = new FDistribution(numeratordf, denominatordf);
@@ -237,6 +359,9 @@ public class Calculator {
         return calculations;
     }
 
+    /**
+     * Computations for factorial, permutation, and combinations
+     */
 
     public static double factorial(long n) {
         if (n == 0 || n == 1) return 1;

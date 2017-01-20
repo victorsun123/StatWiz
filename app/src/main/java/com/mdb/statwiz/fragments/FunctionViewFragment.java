@@ -14,6 +14,10 @@ import com.mdb.statwiz.activities.MainActivity;
 import com.mdb.statwiz.adapters.FunctionViewAdapter;
 import com.mdb.statwiz.utils.FunctionsList;
 
+
+/**
+* This fragment contains list of functions for each category i.e. distributions or probability
+*/
 public class FunctionViewFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private FunctionViewAdapter mAdapter;
